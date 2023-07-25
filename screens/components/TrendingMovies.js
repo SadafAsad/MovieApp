@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 
-const TrendingMovies = () => {
+const TrendingMovies = ({ data }) => {
     return (
         <View>
             <Text>Trending Movies</Text>

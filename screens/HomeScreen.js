@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, SafeAreaView, StyleSheet, Platform, TouchableOpacity, ScrollView } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import { Bars3CenterLeftIcon, MagnifyingGlassIcon } from 'react-native-heroicons/outline'
+import TrendingMovies from './components/TrendingMovies'
 
 const ios = Platform.OS == 'ios'
 
 const HomeScreen = () => {
     const { container, safeArea, icons, logo, mDesign } = styles
+    const [trending, setTrending] = useState([1, 2, 3])
+
     return (
         <View style={container}>
             <SafeAreaView style={ ios ? safeArea : marginBottom=3 }>
@@ -24,7 +27,7 @@ const HomeScreen = () => {
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{paddingBottom: 10}}
             >
-                
+                <TrendingMovies data={trending} />
             </ScrollView>
         </View>
     )
