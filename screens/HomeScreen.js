@@ -1,7 +1,7 @@
 import React from 'react'
-import { View, Text, SafeAreaView, StyleSheet, Platform } from 'react-native'
+import { View, Text, SafeAreaView, StyleSheet, Platform, TouchableOpacity } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
-import { Bars3CenterLeftIcon } from 'react-native-heroicons/outline'
+import { Bars3CenterLeftIcon, MagnifyingGlassIcon } from 'react-native-heroicons/outline'
 
 const ios = Platform.OS == 'ios'
 
@@ -14,6 +14,9 @@ const HomeScreen = () => {
                 <View style={icons}>
                     <Bars3CenterLeftIcon size={30} strokeWidth={2} color={'white'} />
                     <Text style={logo}>Movies</Text>
+                    <TouchableOpacity>
+                        <MagnifyingGlassIcon size={30} strokeWidth={2} color={'white'} />
+                    </TouchableOpacity>
                 </View>
             </SafeAreaView>
         </View>
