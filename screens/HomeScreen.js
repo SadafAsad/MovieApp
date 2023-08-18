@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { View, Text, SafeAreaView, StyleSheet, Platform, TouchableOpacity, ScrollView } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import { Bars3CenterLeftIcon, MagnifyingGlassIcon } from 'react-native-heroicons/outline'
-import TrendingMovies from './components/TrendingMovies'
+import TrendingMovies from '../components/TrendingMovies'
 
 const ios = Platform.OS == 'ios'
 

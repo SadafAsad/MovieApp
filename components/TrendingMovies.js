@@ -1,6 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text, TouchableWithoutFeedbackComponent } from 'react-native'
-import { MoonIcon } from 'react-native-heroicons/outline'
+import { StyleSheet, View, Text } from 'react-native'
 import Carousel from 'react-native-snap-carousel'
 import MovieCard from './MovieCard'
 
