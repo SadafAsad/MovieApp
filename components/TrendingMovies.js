@@ -8,8 +8,9 @@ var {width, height} = Dimensions.get('window')
 
 const TrendingMovies = ({ data }) => {
     const { container, textDesign } = styles
+    const navigation = useNavigation()
 
-    const handleClick = () => {
+    const handleClick = (item) => {
         navigation.navigate('Movie', item)
     }
 
@@ -18,7 +19,7 @@ const TrendingMovies = ({ data }) => {
             <Text style={textDesign}>Trending</Text>
             <Carousel 
                 data={data}
-                renderItem={({item}) => <MovieCard item={item} handleClick={handleClick}/>}
+                renderItem={({item}) => <MovieCard handleClick={() => handleClick(item)}/>}
                 firstItem={1}
                 inactiveSlideOpacity={0.60}
                 sliderWidth={width}
