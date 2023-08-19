@@ -3,9 +3,9 @@ import { TouchableWithoutFeedback, StyleSheet, Text, Dimensions, Image } from 'r
 
 var {width, height} = Dimensions.get('window')
 
-const MovieCard = ({ item }) => {
+const MovieCard = ({ item, handleClick }) => {
     return (
-        <TouchableWithoutFeedback>
+        <TouchableWithoutFeedback onPress={handleClick}>
             <Image 
                 source={require('../assets/barbie.jpg')} 
                 style={{
