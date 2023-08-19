@@ -4,6 +4,7 @@ import { useRoute, useNavigation } from "@react-navigation/native"
 import { ChevronLeftIcon } from "react-native-heroicons/outline"
 import { HeartIcon } from "react-native-heroicons/solid"
 import { LinearGradient } from "expo-linear-gradient"
+import Cast from "../components/Cast"
 
 var {width, height} = Dimensions.get('window')
 const ios = Platform.OS == 'ios'
@@ -13,6 +14,7 @@ const MovieScreen = () => {
     const {params: item} = useRoute()
     const navigation = useNavigation()
     const [isFavourite, toggleFavourite] = useState(false)
+    const [cast, setCast] = useState([1, 2, 3, 4])
     let movieName = "Oppenheimer"
 
     useEffect(() => {
@@ -79,6 +81,7 @@ const MovieScreen = () => {
                     During World War II, Lt. Gen. Leslie Groves Jr. appoints physicist J. Robert Oppenheimer to work on the top-secret Manhattan Project. Oppenheimer and a team of scientists spend years developing and designing the atomic bomb. Their work comes to fruition on July 16, 1945, as they witness the world's first nuclear explosion, forever changing the course of history.
                 </Text>
             </View>
+            <Cast cast={cast} />
         </ScrollView>
     )
 }
