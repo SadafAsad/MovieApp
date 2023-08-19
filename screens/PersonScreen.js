@@ -99,6 +99,10 @@ const PersonScreen = () => {
                         <Text style={{color: '#717573', fontSize: 15}}>64.62</Text>
                     </View>
                 </View>
+                <View style={{marginVertical: 6, marginHorizontal: 4}}>
+                    <Text style={{color: 'white', fontSize: 20}}>Biography</Text>
+                    <Text style={{color: '#717573', letterSpacing: 1}}>Margot Elise Robbie is an Australian actress and producer. Known for her work in both blockbuster and independent films, she has received various accolades, including nominations for two Academy Awards, four Golden Globe Awards, and five British Academy Film Awards.</Text>
+                </View>
             </View>
         </ScrollView>
     )
