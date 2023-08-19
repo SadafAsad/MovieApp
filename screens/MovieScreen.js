@@ -13,6 +13,7 @@ const MovieScreen = () => {
     const {params: item} = useRoute()
     const navigation = useNavigation()
     const [isFavourite, toggleFavourite] = useState(false)
+    let movieName = "Oppenheimer"
 
     useEffect(() => {
 
@@ -61,6 +62,22 @@ const MovieScreen = () => {
                         end={{x: 0.5, y: 1}}
                     />
                 </View>
+            </View>
+            <View style={{marginTop: -(height*0.09)}}>
+                <Text style={{color: 'white', alignSelf: 'center', fontSize: 20, fontWeight: 'bold', letterSpacing: 1}}>
+                    {movieName}
+                </Text>
+                <Text style={{color: '#717573', fontWeight: 'bold', fontSize: 16, alignSelf: 'center'}}>
+                        Released • 2023 • 170 min
+                </Text>
+                <View style={{flexDirection: 'row', justifyContent: 'center', margin: 4}}>
+                    <Text style={{color: '#717573', alignSelf: 'center', fontWeight: 'bold'}}>Action • </Text>
+                    <Text style={{color: '#717573', alignSelf: 'center', fontWeight: 'bold'}}>Thrill • </Text>
+                    <Text style={{color: '#717573', alignSelf: 'center', fontWeight: 'bold'}}>Scientific</Text>
+                </View>
+                <Text style={{color: '#717573', margin: 4, letterSpacing: 1}}>
+                    During World War II, Lt. Gen. Leslie Groves Jr. appoints physicist J. Robert Oppenheimer to work on the top-secret Manhattan Project. Oppenheimer and a team of scientists spend years developing and designing the atomic bomb. Their work comes to fruition on July 16, 1945, as they witness the world's first nuclear explosion, forever changing the course of history.
+                </Text>
             </View>
         </ScrollView>
     )
