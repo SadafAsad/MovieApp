@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, Dimensions, ScrollView, SafeAreaView, Touchable
 import { ChevronLeftIcon } from "react-native-heroicons/outline"
 import { HeartIcon } from "react-native-heroicons/solid"
 import { useNavigation } from "@react-navigation/native"
+import MovieList from "../components/MovieList"
 
 var {width, height} = Dimensions.get('window')
 const ios = Platform.OS == 'ios'
@@ -11,6 +12,7 @@ const verticalMargin = ios ? 0 : 3
 const PersonScreen = () => {
     const [isFavourite, toggleFavourite] = useState(false)
     const navigation = useNavigation()
+    const [personMovies, setPersonMovies] = useState([1, 2, 3, 4])
 
     return (
         <ScrollView
@@ -103,6 +105,7 @@ const PersonScreen = () => {
                     <Text style={{color: 'white', fontSize: 20}}>Biography</Text>
                     <Text style={{color: '#717573', letterSpacing: 1}}>Margot Elise Robbie is an Australian actress and producer. Known for her work in both blockbuster and independent films, she has received various accolades, including nominations for two Academy Awards, four Golden Globe Awards, and five British Academy Film Awards.</Text>
                 </View>
+                <MovieList title={'Movies'} data={personMovies} hideSeeAll={true} />
             </View>
         </ScrollView>
     )
