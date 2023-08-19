@@ -5,6 +5,7 @@ import { ChevronLeftIcon } from "react-native-heroicons/outline"
 import { HeartIcon } from "react-native-heroicons/solid"
 import { LinearGradient } from "expo-linear-gradient"
 import Cast from "../components/Cast"
+import MovieList from "../components/MovieList"
 
 var {width, height} = Dimensions.get('window')
 const ios = Platform.OS == 'ios'
@@ -15,6 +16,7 @@ const MovieScreen = () => {
     const navigation = useNavigation()
     const [isFavourite, toggleFavourite] = useState(false)
     const [cast, setCast] = useState([1, 2, 3, 4])
+    const [similarMovies, setSimilarMovies] = useState([1, 2, 3, 4])
     let movieName = "Oppenheimer"
 
     useEffect(() => {
@@ -82,6 +84,7 @@ const MovieScreen = () => {
                 </Text>
             </View>
             <Cast cast={cast} navigation={navigation} />
+            <MovieList title="Similar Movies" hideSeeAll={true} data={similarMovies} />
         </ScrollView>
     )
 }

@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native"
 
 var {width, height} = Dimensions.get('window')
 
-const MovieList = ({ title, data }) => {
+const MovieList = ({ title, data, hideSeeAll }) => {
     let movieName = "Oppenheimer"
     const navigation = useNavigation()
 
@@ -12,9 +12,13 @@ const MovieList = ({ title, data }) => {
         <View> 
             <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                 <Text style={{color: 'white', fontSize: 20}}>{title}</Text>
-                <TouchableOpacity>
-                    <Text style={{color: '#eab308'}}>See All</Text>
-                </TouchableOpacity>
+                {
+                    !hideSeeAll && (
+                        <TouchableOpacity>
+                            <Text style={{color: '#eab308'}}>See All</Text>
+                        </TouchableOpacity>
+                    )
+                }
             </View>
             <ScrollView
                 horizontal
