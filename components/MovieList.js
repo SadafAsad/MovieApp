@@ -30,7 +30,7 @@ const MovieList = ({ title, data, hideSeeAll }) => {
                         return (
                             <TouchableWithoutFeedback
                                 key={index}
-                                onpress={() => navigation.navigate('Movie', item)}
+                                onpress={() => navigation.push('Movie', item)}
                             >
                                 <View style={{margin: 4}}>
                                     <Image 
