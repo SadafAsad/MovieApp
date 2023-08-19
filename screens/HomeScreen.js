@@ -3,12 +3,15 @@ import { View, Text, SafeAreaView, StyleSheet, Platform, TouchableOpacity, Scrol
 import { StatusBar } from 'expo-status-bar'
 import { Bars3CenterLeftIcon, MagnifyingGlassIcon } from 'react-native-heroicons/outline'
 import TrendingMovies from '../components/TrendingMovies'
+import MovieList from '../components/MovieList'
 
 const ios = Platform.OS == 'ios'
 
 const HomeScreen = () => {
     const { container, safeArea, icons, logo, mDesign } = styles
     const [trending, setTrending] = useState([1, 2, 3])
+    const [upcoming, setUpcoming] = useState([1, 2, 3])
+    const [topRated, setTopRated] = useState([1, 2, 3])
 
     return (
         <View style={container}>
@@ -28,6 +31,7 @@ const HomeScreen = () => {
                 contentContainerStyle={{paddingBottom: 10}}
             >
                 <TrendingMovies data={trending} />
+                <MovieList title="Upcoming" data={upcoming} />
             </ScrollView>
         </View>
     )
