@@ -63,6 +63,42 @@ const PersonScreen = () => {
                         />
                     </View>
                 </View>
+                <View style={{marginTop: 6}}>
+                    <Text style={{fontSize: 20, color: 'white', fontWeight: 'bold', alignSelf: 'center'}}>
+                        Margo Robbie
+                    </Text>
+                    <Text style={{fontSize: 16, color: '#717573', fontWeight: 'bold', alignSelf: 'center', margin: 4}}>
+                        London, United Kingdom
+                    </Text>
+                </View>
+                <View 
+                    style={{
+                        marginHorizontal: 3, 
+                        marginTop: 6, 
+                        flexDirection: 'row', 
+                        justifyContent: 'space-between', 
+                        alignItems: 'center',
+                        backgroundColor: '#959c99',
+                        borderRadius: '100%',
+                        padding: 4
+                    }}>
+                    <View style={{borderRightWidth: 2, paddingHorizontal: 2, alignItems: 'center', borderColor: '#717573'}}>
+                        <Text style={{color: 'white', fontWeight: 'bold'}}>Gender</Text>
+                        <Text style={{color: '#717573', fontSize: 15}}>Male</Text>
+                    </View>
+                    <View style={{borderRightWidth: 2, paddingHorizontal: 2, alignItems: 'center', borderColor: '#717573'}}>
+                        <Text style={{color: 'white', fontWeight: 'bold'}}>Birthday</Text>
+                        <Text style={{color: '#717573', fontSize: 15}}>1964-09-09</Text>
+                    </View>
+                    <View style={{borderRightWidth: 2, paddingHorizontal: 2, alignItems: 'center', borderColor: '#717573'}}>
+                        <Text style={{color: 'white', fontWeight: 'bold'}}>Known for</Text>
+                        <Text style={{color: '#717573', fontSize: 15}}>Acting</Text>
+                    </View>
+                    <View style={{paddingHorizontal: 2, alignItems: 'center', borderColor: '#717573'}}>
+                        <Text style={{color: 'white', fontWeight: 'bold'}}>Popularity</Text>
+                        <Text style={{color: '#717573', fontSize: 15}}>64.62</Text>
+                    </View>
+                </View>
             </View>
         </ScrollView>
     )
