@@ -7,43 +7,24 @@ import Loading from "../components/Loading"
 var {width, height} = Dimensions.get('window')
 
 const SearchScreen = () => {
-    const navigation = useNavigation()
-    const [results, setResults] = useState([])
+    const { searchArea, searchInput, cancel } = styles
+
+    const [results, setResults] = useState([1, 2, 3, 4, 5])
     const [loading, setLoading] = useState(false)
+    
+    const navigation = useNavigation()
+    
     let movieName = 'Barbie'
 
     return (
         <SafeAreaView style={{flex: 1, backgroundColor: '#262626'}}>
-            <View style={{
-                marginHorizontal: 4,
-                marginBottom: 3,
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignContent: 'center',
-                borderRadius: '100%',
-                borderColor: '#717573',
-                borderWidth: 1
-            }}>
+            <View style={searchArea}>
                 <TextInput
                     placeholder="Search Movie"
-                    placeholderTextColor={'lightgray'}
-                    style={{
-                        paddingBottom: 1,
-                        paddingLeft: 6,
-                        flex: 1,
-                        fontWeight: 'bold',
-                        color: 'white',
-                        letterSpacing: 1
-                    }}
+                    placeholderTextColor={'gray'}
+                    style={searchInput}
                 />
-                <TouchableOpacity onPress={() => navigation.goBack()}
-                    style={{
-                        borderRadius: '100%',
-                        padding: 3,
-                        margin: 1,
-                        backgroundColor: '#717573'
-                    }}
-                >
+                <TouchableOpacity onPress={() => navigation.goBack()} style={cancel}>
                     <XMarkIcon size='25' color='white' />
                 </TouchableOpacity>
             </View>
@@ -54,10 +35,9 @@ const SearchScreen = () => {
                     results.length>0 ? (
                         <ScrollView
                             showsVerticalScrollIndicator={false}
-                            contentContainerStyle={{paddingHorizontal: 15}}
-                            style={{marginBottom: 3}}
+                            contentContainerStyle={{paddingHorizontal: 15, paddingVertical: 5}}
                         >
-                            <Text style={{color: 'white', fontWeight: 'bold', marginLeft: 1}}>Results ({results.length})</Text>
+                            <Text style={{color: 'white', fontWeight: 'bold', marginLeft: 5}}>Results ({results.length})</Text>
                             <View style={{
                                 flexDirection: 'row',
                                 justifyContent: 'space-between',
@@ -70,12 +50,12 @@ const SearchScreen = () => {
                                                 key={index}
                                                 onPress={() => navigation.push('Movie', item)}
                                             >
-                                                <View style={{marginBottom: 4, marginVertical: 2}}>
+                                                <View style={{marginVertical: 5}}>
                                                     <Image
                                                         style={{borderRadius: 10, width: width*0.44, height: height*0.3}}
                                                         source={require('../assets/barbie.jpg')}
                                                     />
-                                                    <Text style={{color: 'white', marginLeft: 1}}>
+                                                    <Text style={{color: 'white', marginLeft: 5, marginTop: 5, color: 'lightgray'}}>
                                                         {movieName.length>22 ? movieName.slice(0,22)+'...' : movieName}
                                                     </Text>
                                                 </View>
@@ -86,9 +66,9 @@ const SearchScreen = () => {
                             </View>
                         </ScrollView>
                     ) : (
-                        <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+                        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                             <Image 
-                                style={{width: 196, height: 196}}
+                                style={{width: 200, height: 200}}
                                 source={require('../assets/movietime.png')}
                             />
                         </View>
@@ -100,7 +80,28 @@ const SearchScreen = () => {
 }
 
 const styles = StyleSheet.create({
-
+    searchArea: {
+        margin: 5,
+        padding: 5,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignContent: 'center',
+        borderRadius: 50,
+        borderColor: 'gray',
+        borderWidth: 1
+    },
+    searchInput: {
+        flex: 1,
+        fontWeight: 'bold',
+        color: 'white',
+        letterSpacing: 1,
+        margin: 5
+    },
+    cancel: {
+        borderRadius: 50,
+        backgroundColor: 'gray',
+        padding: 5
+    }
 })
 
 export default SearchScreen
