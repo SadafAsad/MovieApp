@@ -7,7 +7,7 @@ var {width, height} = Dimensions.get('window')
 
 const SearchScreen = () => {
     const navigation = useNavigation()
-    const [results, setResults] = useState([1, 2, 3, 4])
+    const [results, setResults] = useState([])
     let movieName = 'Barbie'
 
     return (
@@ -45,39 +45,50 @@ const SearchScreen = () => {
                     <XMarkIcon size='25' color='white' />
                 </TouchableOpacity>
             </View>
-            <ScrollView
-                showsVerticalScrollIndicator={false}
-                contentContainerStyle={{paddingHorizontal: 15}}
-                style={{marginBottom: 3}}
-            >
-                <Text style={{color: 'white', fontWeight: 'bold', marginLeft: 1}}>Results ({results.length})</Text>
-                <View style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    flexWrap: 'wrap'
-                }}>
-                    {
-                        results.map((item, index) => {
-                            return(
-                                <TouchableWithoutFeedback
-                                    key={index}
-                                    onPress={() => navigation.push('Movie', item)}
-                                >
-                                    <View style={{marginBottom: 4, marginVertical: 2}}>
-                                        <Image
-                                            style={{borderRadius: 10, width: width*0.44, height: height*0.3}}
-                                            source={require('../assets/barbie.jpg')}
-                                        />
-                                        <Text style={{color: 'white', marginLeft: 1}}>
-                                            {movieName.length>22 ? movieName.slice(0,22)+'...' : movieName}
-                                        </Text>
-                                    </View>
-                                </TouchableWithoutFeedback>
-                            )
-                        })
-                    }
-                </View>
-            </ScrollView>
+            {
+                results.length>0 ? (
+                    <ScrollView
+                        showsVerticalScrollIndicator={false}
+                        contentContainerStyle={{paddingHorizontal: 15}}
+                        style={{marginBottom: 3}}
+                    >
+                        <Text style={{color: 'white', fontWeight: 'bold', marginLeft: 1}}>Results ({results.length})</Text>
+                        <View style={{
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            flexWrap: 'wrap'
+                        }}>
+                            {
+                                results.map((item, index) => {
+                                    return(
+                                        <TouchableWithoutFeedback
+                                            key={index}
+                                            onPress={() => navigation.push('Movie', item)}
+                                        >
+                                            <View style={{marginBottom: 4, marginVertical: 2}}>
+                                                <Image
+                                                    style={{borderRadius: 10, width: width*0.44, height: height*0.3}}
+                                                    source={require('../assets/barbie.jpg')}
+                                                />
+                                                <Text style={{color: 'white', marginLeft: 1}}>
+                                                    {movieName.length>22 ? movieName.slice(0,22)+'...' : movieName}
+                                                </Text>
+                                            </View>
+                                        </TouchableWithoutFeedback>
+                                    )
+                                })
+                            }
+                        </View>
+                    </ScrollView>
+                ) : (
+                    <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+                        <Image 
+                            style={{width: 196, height: 196}}
+                            source={require('../assets/movietime.png')}
+                        />
+                    </View>
+                )
+            }
         </SafeAreaView>
     )
 }
