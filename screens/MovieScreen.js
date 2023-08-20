@@ -16,8 +16,8 @@ const MovieScreen = () => {
     const { safeArea, backButton, poster, gradient, name, movieDetail, genreContainer, genre, description } = styles
 
     const [isFavourite, toggleFavourite] = useState(false)
-    const [cast, setCast] = useState([1, 2, 3, 4])
-    const [similarMovies, setSimilarMovies] = useState([1, 2, 3, 4])
+    const [cast, setCast] = useState([])
+    const [similarMovies, setSimilarMovies] = useState([])
     const [loading, setLoading] = useState(false)
     
     const {params: item} = useRoute()
@@ -26,7 +26,7 @@ const MovieScreen = () => {
     let movieName = "Oppenheimer"
 
     useEffect(() => {
-
+        console.log('item.id: ', item.id)
     }, [item])
 
     return (
@@ -78,7 +78,7 @@ const MovieScreen = () => {
                 </Text>
             </View>
             <Cast cast={cast} navigation={navigation} />
-            <MovieList title="Similar Movies" hideSeeAll={true} data={similarMovies} />
+            {/* <MovieList title="Similar Movies" hideSeeAll={true} data={similarMovies} /> */}
         </ScrollView>
     )
 }
