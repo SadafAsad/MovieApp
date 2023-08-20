@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
         margin: 1
     },
     movieDetail: {
-        color: '#717573', 
+        color: 'gray', 
         fontWeight: 'bold', 
         fontSize: 16, 
         alignSelf: 'center',
@@ -131,12 +131,12 @@ const styles = StyleSheet.create({
         margin: 1
     },
     genre: {
-        color: '#717573', 
+        color: 'gray', 
         alignSelf: 'center', 
         fontWeight: 'bold'
     },
     description: {
-        color: '#717573',
+        color: 'gray',
         letterSpacing: 1,
         margin: 5,
         marginTop: 10
