@@ -7,6 +7,8 @@ import { LinearGradient } from "expo-linear-gradient"
 import Cast from "../components/Cast"
 import MovieList from "../components/MovieList"
 import Loading from "../components/Loading"
+import axios from "axios"
+import { fetchMovieDetails, image500 } from "../api/moviedb"
 
 var {width, height} = Dimensions.get('window')
 const ios = Platform.OS == 'ios'
@@ -18,7 +20,8 @@ const MovieScreen = () => {
     const [isFavourite, toggleFavourite] = useState(false)
     const [cast, setCast] = useState([])
     const [similarMovies, setSimilarMovies] = useState([])
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
+    const [movie, setMovie] = useState({})
     
     const {params: item} = useRoute()
     const navigation = useNavigation()
@@ -26,8 +29,14 @@ const MovieScreen = () => {
     let movieName = "Oppenheimer"
 
     useEffect(() => {
-        console.log('item.id: ', item.id)
+        getMovieDetails(item.id)
     }, [item])
+
+    const getMovieDetails = async id => {
+        const data = await fetchMovieDetails(id)
+        if (data) setMovie(data)
+        setLoading(false)
+    }
 
     return (
         <ScrollView
@@ -52,7 +61,8 @@ const MovieScreen = () => {
                     ) : (
                         <View>
                             <Image 
-                                source={require('../assets/oppenheimer.jpg')}
+                                // source={require('../assets/oppenheimer.jpg')}
+                                source={{uri: image500(movie?.poster_path)}}
                                 style={poster}
                             />
                             <LinearGradient

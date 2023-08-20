@@ -6,7 +6,7 @@ var {width, height} = Dimensions.get('window')
 
 const MovieCard = ({ item, handleClick }) => {
     return (
-        <TouchableWithoutFeedback onPress={handleClick(item)}>
+        <TouchableWithoutFeedback onPress={() => handleClick(item)}>
             <Image 
                 // source={require('../assets/barbie.jpg')} 
                 source={{uri: image500(item.poster_path) || fallBackMoviePoster}}
