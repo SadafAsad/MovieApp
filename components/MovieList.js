@@ -39,7 +39,7 @@ const MovieList = ({ title, data, hideSeeAll }) => {
                                         style={{width: width*0.33, height: height*0.22, borderRadius: 10}}
                                     />
                                     <Text style={{color: 'white', marginTop: 5}}>
-                                        {item?.title.length>14 ? item?.title.slice(0,14)+'...' : item?.title}
+                                        {item?.title?.length>14 ? item?.title?.slice(0,14)+'...' : item?.title}
                                     </Text>
                                 </View>
                             </TouchableWithoutFeedback>

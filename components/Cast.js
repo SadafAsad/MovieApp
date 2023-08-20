@@ -19,7 +19,7 @@ const Cast = ({ cast, navigation }) => {
                         return (
                             <TouchableOpacity
                                 Key={index}
-                                style={{marginRight: 5, alignSelf: 'center'}}
+                                style={{marginRight: 5, alignItems: 'center'}}
                                 onPress={() => navigation.navigate('Person', person)}
                             >
                                 <View
@@ -27,8 +27,7 @@ const Cast = ({ cast, navigation }) => {
                                         overflow: 'hidden',
                                         borderRadius: 35,
                                         height: 70,
-                                        width: 70,
-                                        alignSelf: 'center'
+                                        width: 70
                                     }}
                                 >
                                     <Image
