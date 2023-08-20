@@ -8,8 +8,6 @@ var {width, height} = Dimensions.get('window')
 const MovieList = ({ title, data, hideSeeAll }) => {
     const navigation = useNavigation()
 
-    let movieName = "Oppenheimer"
-
     return ( 
         <View> 
             <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 10, marginBottom: 10, marginRight: 10, marginLeft: 10}}>
@@ -41,7 +39,7 @@ const MovieList = ({ title, data, hideSeeAll }) => {
                                         style={{width: width*0.33, height: height*0.22, borderRadius: 10}}
                                     />
                                     <Text style={{color: 'white', marginTop: 5}}>
-                                        {movieName.length>14 ? movieName.slice(0,14)+'...' : movieName}
+                                        {item.title.length>14 ? item.title.slice(0,14)+'...' : item.title}
                                     </Text>
                                 </View>
                             </TouchableWithoutFeedback>
