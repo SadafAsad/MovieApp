@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     textDesign: {
         color: 'white',
         marginBottom: 20,
-        marginLeft: 5,
+        marginLeft: 10,
         marginTop: 20,
         fontSize: 16
     }

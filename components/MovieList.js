@@ -12,11 +12,11 @@ const MovieList = ({ title, data, hideSeeAll }) => {
 
     return ( 
         <View> 
-            <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 10}}>
-                <Text style={{color: 'white', fontSize: 16, marginTop: 5, marginLeft: 5, marginBottom: 5}}>{title}</Text>
+            <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 10, marginBottom: 10, marginRight: 10, marginLeft: 10}}>
+                <Text style={{color: 'white', fontSize: 16}}>{title}</Text>
                 {
                     !hideSeeAll && (
-                        <TouchableOpacity style={{marginRight: 5}}>
+                        <TouchableOpacity>
                             <Text style={{color: '#eab308'}}>See All</Text>
                         </TouchableOpacity>
                     )
