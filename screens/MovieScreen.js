@@ -8,7 +8,7 @@ import Cast from "../components/Cast"
 import MovieList from "../components/MovieList"
 import Loading from "../components/Loading"
 import axios from "axios"
-import { fetchMovieDetails, image500 } from "../api/moviedb"
+import { fallBackMoviePoster, fetchMovieDetails, image500 } from "../api/moviedb"
 
 var {width, height} = Dimensions.get('window')
 const ios = Platform.OS == 'ios'
@@ -41,7 +41,7 @@ const MovieScreen = () => {
     return (
         <ScrollView
             contentContainerStyle={{paddingBottom: 20}}
-            style={{flex: 1, backgroundColor: '#232323'}}
+            style={{flex: 1, backgroundColor: 'rgba(23,23,23,1)'}}
         >
             <View style={{width: width}}>
                 <SafeAreaView style={safeArea}>
@@ -62,7 +62,7 @@ const MovieScreen = () => {
                         <View>
                             <Image 
                                 // source={require('../assets/oppenheimer.jpg')}
-                                source={{uri: image500(movie?.poster_path)}}
+                                source={{uri: image500(movie?.poster_path) || fallBackMoviePoster}}
                                 style={poster}
                             />
                             <LinearGradient
