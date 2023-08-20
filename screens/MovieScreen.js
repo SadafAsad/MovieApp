@@ -15,7 +15,7 @@ const ios = Platform.OS == 'ios'
 const topMargin = ios ? 0 : 3
 
 const MovieScreen = () => {
-    const { safeArea, backButton, poster, gradient, name, movieDetail, genreContainer, genre, description } = styles
+    const { safeArea, backButton, poster, gradient, name, movieDetail, genreContainer, genreText, description } = styles
 
     const [isFavourite, toggleFavourite] = useState(false)
     const [cast, setCast] = useState([])
@@ -76,16 +76,25 @@ const MovieScreen = () => {
                 }
             </View>
             <View style={{marginTop: -(height*0.09)}}>
-                <Text style={name}>{movieName}</Text>
-                <Text style={movieDetail}>Released • 2023 • 170 min</Text>
+                <Text style={name}>{movie?.title}</Text>
+                {
+                    movie?.id ? (
+                        <Text style={movieDetail}>
+                            {movie?.status} • {movie?.release_date.split('-')[0]} • {movie?.runtime} min
+                        </Text>
+                    ) : null
+                }
                 <View style={genreContainer}>
-                    <Text style={genre}>Action • </Text>
-                    <Text style={genre}>Thrill • </Text>
-                    <Text style={genre}>Scientific</Text>
+                    {
+                        movie?.genres?.map((genre, index) => {
+                            let showDot = index+1 != movie.genres.length
+                            return (
+                                <Text key={index} style={genreText}>{genre?.name} {showDot ? '•' : null} </Text>
+                            )
+                        })
+                    }
                 </View>
-                <Text style={description}>
-                    During World War II, Lt. Gen. Leslie Groves Jr. appoints physicist J. Robert Oppenheimer to work on the top-secret Manhattan Project. Oppenheimer and a team of scientists spend years developing and designing the atomic bomb. Their work comes to fruition on July 16, 1945, as they witness the world's first nuclear explosion, forever changing the course of history.
-                </Text>
+                <Text style={description}>{movie?.overview}</Text>
             </View>
             <Cast cast={cast} navigation={navigation} />
             {/* <MovieList title="Similar Movies" hideSeeAll={true} data={similarMovies} /> */}
@@ -126,21 +135,21 @@ const styles = StyleSheet.create({
         fontSize: 20, 
         fontWeight: 'bold', 
         letterSpacing: 1,
-        margin: 1
+        margin: 5
     },
     movieDetail: {
         color: 'gray', 
         fontWeight: 'bold', 
         fontSize: 16, 
         alignSelf: 'center',
-        margin: 1
+        margin: 5
     },
     genreContainer: {
         flexDirection: 'row', 
         justifyContent: 'center',
-        margin: 1
+        margin: 5
     },
-    genre: {
+    genreText: {
         color: 'gray', 
         alignSelf: 'center', 
         fontWeight: 'bold'
