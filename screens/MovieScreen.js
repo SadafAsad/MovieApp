@@ -6,6 +6,7 @@ import { HeartIcon } from "react-native-heroicons/solid"
 import { LinearGradient } from "expo-linear-gradient"
 import Cast from "../components/Cast"
 import MovieList from "../components/MovieList"
+import Loading from "../components/Loading"
 
 var {width, height} = Dimensions.get('window')
 const ios = Platform.OS == 'ios'
@@ -17,6 +18,7 @@ const MovieScreen = () => {
     const [isFavourite, toggleFavourite] = useState(false)
     const [cast, setCast] = useState([1, 2, 3, 4])
     const [similarMovies, setSimilarMovies] = useState([1, 2, 3, 4])
+    const [loading, setLoading] = useState(false)
     let movieName = "Oppenheimer"
 
     useEffect(() => {
@@ -51,21 +53,27 @@ const MovieScreen = () => {
                         <HeartIcon size='35' color={isFavourite ? 'red' : 'white'} />
                     </TouchableOpacity>
                 </SafeAreaView>
-                <View>
-                    <Image 
-                        source={require('../assets/oppenheimer.jpg')}
-                        style={{
-                            width: width,
-                            height: height*0.55
-                        }}
-                    />
-                    <LinearGradient
-                        colors={['transparent', 'rgba(23,23,23,0.8)', 'rgba(23,23,23,1)']}
-                        style={{width: width, height: height*0.4, position: 'absolute', bottom: 0}}
-                        start={{x: 0.5, y: 0}}
-                        end={{x: 0.5, y: 1}}
-                    />
-                </View>
+                {
+                    loading ? (
+                        <Loading />
+                    ) : (
+                        <View>
+                            <Image 
+                                source={require('../assets/oppenheimer.jpg')}
+                                style={{
+                                    width: width,
+                                    height: height*0.55
+                                }}
+                            />
+                            <LinearGradient
+                                colors={['transparent', 'rgba(23,23,23,0.8)', 'rgba(23,23,23,1)']}
+                                style={{width: width, height: height*0.4, position: 'absolute', bottom: 0}}
+                                start={{x: 0.5, y: 0}}
+                                end={{x: 0.5, y: 1}}
+                            />
+                        </View>
+                    )
+                }
             </View>
             <View style={{marginTop: -(height*0.09)}}>
                 <Text style={{color: 'white', alignSelf: 'center', fontSize: 20, fontWeight: 'bold', letterSpacing: 1}}>
