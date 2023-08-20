@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
         fontSize: 18
     },
     bioText: {
-        color: '#717573', 
+        color: 'gray', 
         letterSpacing: 1, 
         marginTop: 5
     }
