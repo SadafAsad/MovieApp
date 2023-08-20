@@ -5,16 +5,17 @@ import { useNavigation } from "@react-navigation/native"
 var {width, height} = Dimensions.get('window')
 
 const MovieList = ({ title, data, hideSeeAll }) => {
-    let movieName = "Oppenheimer"
     const navigation = useNavigation()
+
+    let movieName = "Oppenheimer"
 
     return ( 
         <View> 
             <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-                <Text style={{color: 'white', fontSize: 20}}>{title}</Text>
+                <Text style={{color: 'white', fontSize: 16, marginTop: 5, marginLeft: 5, marginBottom: 5}}>{title}</Text>
                 {
                     !hideSeeAll && (
-                        <TouchableOpacity>
+                        <TouchableOpacity style={{marginRight: 5}}>
                             <Text style={{color: '#eab308'}}>See All</Text>
                         </TouchableOpacity>
                     )
@@ -37,9 +38,9 @@ const MovieList = ({ title, data, hideSeeAll }) => {
                                         source={require('../assets/oppenheimer.jpg')}
                                         style={{width: width*0.33, height: height*0.22, borderRadius: 10}}
                                     />
-                                    <Text style={{color: 'white'}}>{
-                                        movieName.length>14 ? movieName.slice(0,14)+'...' : movieName
-                                    }</Text>
+                                    <Text style={{color: 'white', marginTop: 5}}>
+                                        {movieName.length>14 ? movieName.slice(0,14)+'...' : movieName}
+                                    </Text>
                                 </View>
                             </TouchableWithoutFeedback>
                         )
