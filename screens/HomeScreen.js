@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Text, SafeAreaView, StyleSheet, Platform, TouchableOpacity, ScrollView } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import { Bars3CenterLeftIcon, MagnifyingGlassIcon } from 'react-native-heroicons/outline'
@@ -6,6 +6,7 @@ import TrendingMovies from '../components/TrendingMovies'
 import MovieList from '../components/MovieList'
 import { useNavigation } from '@react-navigation/native'
 import Loading from '../components/Loading'
+import { fetchTrendingMovies } from '../api/moviedb'
 
 const ios = Platform.OS == 'ios'
 
@@ -15,9 +16,19 @@ const HomeScreen = () => {
     const [trending, setTrending] = useState([1, 2, 3])
     const [upcoming, setUpcoming] = useState([1, 2, 3])
     const [topRated, setTopRated] = useState([1, 2, 3])
-    const [loading, setLoading] = useState(false)
-    
+    const [loading, setLoading] = useState(true)
+
     const navigation = useNavigation()
+
+    useEffect(() => {
+        getTrendingMovies()
+    }, [])
+
+    const getTrendingMovies = async () => {
+        const data = await fetchTrendingMovies()
+        if (data && data.results) setTrending(data.results)
+        setLoading(false)
+    }
 
     return (
         <View style={container}>
