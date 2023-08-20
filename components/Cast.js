@@ -1,13 +1,14 @@
 import React from "react"
 import { StyleSheet, View, Text, ScrollView, TouchableOpacity, Image } from "react-native"
+import { fallBackPersonImage, image185 } from "../api/moviedb"
 
 const Cast = ({ cast, navigation }) => {
     let personName = 'Margo Robbie'
     let characterName = 'Barbie'
 
     return (
-        <View style={{}}>
-            <Text style={{color: 'white', fontSize: 16, marginLeft: 5, marginBottom: 5}}>Top Cast</Text>
+        <View>
+            <Text style={{color: 'white', fontSize: 16, marginLeft: 5, marginBottom: 15, marginTop: 10}}>Top Cast</Text>
             <ScrollView
                 horizontal
                 showsHorizontalScrollIndicator={false}
@@ -31,15 +32,16 @@ const Cast = ({ cast, navigation }) => {
                                     }}
                                 >
                                     <Image
-                                        source={require('../assets/margo.jpeg')}
-                                        style={{height: '100%', width: '100%'}}
+                                        // source={require('../assets/margo.jpeg')}
+                                        source={{uri: image185(person?.profile_path) || fallBackPersonImage}}
+                                        style={{height: '100%', width: '100%', borderRadius: 50, borderWidth: 1, borderColor: '#ccc'}}
                                     />
                                 </View>
                                 <Text style={{color: 'white', marginTop: 5, fontSize: 10}}>
-                                    {characterName.length>10 ? characterName.slice(0,10)+'...' : characterName}
+                                    {person?.character.length>10 ? person?.character.slice(0,10)+'...' : person?.character}
                                 </Text>
                                 <Text style={{color: 'gray', marginTop: 2, fontSize: 10}}>
-                                    {personName.length>10 ? personName.slice(0,10)+'...' : personName}
+                                    {person?.original_name.length>10 ? person?.original_name.slice(0,10)+'...' : person?.original_name}
                                 </Text>
                             </TouchableOpacity>
                         )
