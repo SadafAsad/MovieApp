@@ -20,7 +20,7 @@ const TrendingMovies = ({ data }) => {
             <Text style={textDesign}>Trending</Text>
             <Carousel 
                 data={data}
-                renderItem={({item}) => <MovieCard handleClick={() => handleClick(item)}/>}
+                renderItem={({item}) => <MovieCard handleClick={() => handleClick} item={item}/>}
                 firstItem={1}
                 inactiveSlideOpacity={0.60}
                 sliderWidth={width}

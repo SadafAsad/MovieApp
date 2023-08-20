@@ -5,7 +5,7 @@ var {width, height} = Dimensions.get('window')
 
 const MovieCard = ({ item, handleClick }) => {
     return (
-        <TouchableWithoutFeedback onPress={handleClick}>
+        <TouchableWithoutFeedback onPress={handleClick(item)}>
             <Image 
                 source={require('../assets/barbie.jpg')} 
                 style={{
