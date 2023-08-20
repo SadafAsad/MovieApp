@@ -8,6 +8,7 @@ var {width, height} = Dimensions.get('window')
 
 const TrendingMovies = ({ data }) => {
     const { container, textDesign } = styles
+
     const navigation = useNavigation()
 
     const handleClick = (item) => {
@@ -32,12 +33,14 @@ const TrendingMovies = ({ data }) => {
 
 const styles = StyleSheet.create({
     container: {
-        marginBottom: 8,
+        marginBottom: 5,
     },
     textDesign: {
         color: 'white',
         marginBottom: 5,
-        fontSize: 20
+        marginLeft: 5,
+        marginTop: 5,
+        fontSize: 16
     }
 })
 
