@@ -5,6 +5,7 @@ import { HeartIcon } from "react-native-heroicons/solid"
 import { useNavigation, useRoute } from "@react-navigation/native"
 import MovieList from "../components/MovieList"
 import Loading from "../components/Loading"
+import { fallBackPersonImage, fetchPersonDetails, fetchPersonMovies, image342, image500 } from "../api/moviedb"
 
 var {width, height} = Dimensions.get('window')
 const ios = Platform.OS == 'ios'
@@ -15,14 +16,26 @@ const PersonScreen = () => {
     const { container, safeArea, backButton, shadow, circular, name, location, detail, detailContainer, detailTitle, detailText, bio, bioText } = styles
 
     const [isFavourite, toggleFavourite] = useState(false)
-    const [personMovies, setPersonMovies] = useState([1, 2, 3, 4])
-    const [loading, setLoading] = useState(false)
+    const [person, setPerson] = useState([])
+    const [personMovies, setPersonMovies] = useState({})
+    const [loading, setLoading] = useState(true)
 
     const navigation = useNavigation()
 
     useEffect(() => {
-        console.log('person log: ', item)
+        getPersonDetails(item.id)
+        // getPersonMovies(item.id)
     },[item])
+
+    const getPersonDetails = async id => {
+        const data = await fetchPersonDetails(id)
+        if (data) setPerson(data)
+        setLoading(false)
+    }
+    const getPersonMovies = async id => {
+        const data = await fetchPersonMovies(id)
+        if (data) setPersonMovies()
+    }
 
     return (
         <ScrollView style={container}>
@@ -45,39 +58,40 @@ const PersonScreen = () => {
                         <View style={shadow}>
                             <View style={circular}>
                                 <Image
-                                    source={require('../assets/margo.jpeg')}
+                                    // source={require('../assets/margo.jpeg')}
+                                    source={{uri: image342(person?.profile_path) || fallBackPersonImage}}
                                     style={{height: '100%', width: '100%'}}
                                 />
                             </View>
                         </View>
                         <View style={{marginTop: 5}}>
-                            <Text style={name}>Margo Robbie</Text>
-                            <Text style={location}>London, United Kingdom</Text>
+                            <Text style={name}>{person?.name}</Text>
+                            <Text style={location}>{person?.place_of_birth}</Text>
                         </View>
                         <View 
                             style={detailContainer}>
                             <View style={detail}>
                                 <Text style={detailTitle}>Gender</Text>
-                                <Text style={detailText}>Male</Text>
+                                <Text style={detailText}>{person?.gender==1 ? 'Female' : 'Male'}</Text>
                             </View>
                             <View style={detail}>
                                 <Text style={detailTitle}>Birthday</Text>
-                                <Text style={detailText}>1964-09-09</Text>
+                                <Text style={detailText}>{person?.birthday}</Text>
                             </View>
                             <View style={detail}>
                                 <Text style={detailTitle}>Known for</Text>
-                                <Text style={detailText}>Acting</Text>
+                                <Text style={detailText}>{person?.known_for_department}</Text>
                             </View>
                             <View style={{paddingHorizontal: 5, alignItems: 'center'}}>
                                 <Text style={detailTitle}>Popularity</Text>
-                                <Text style={detailText}>64.62</Text>
+                                <Text style={detailText}>{person?.popularity.toFixed(2)} %</Text>
                             </View>
                         </View>
-                        <View style={{margin: 5}}>
+                        <View style={{margin: 10}}>
                             <Text style={bio}>Biography</Text>
-                            <Text style={bioText}>Margot Elise Robbie is an Australian actress and producer. Known for her work in both blockbuster and independent films, she has received various accolades, including nominations for two Academy Awards, four Golden Globe Awards, and five British Academy Film Awards.</Text>
+                            <Text style={bioText}>{person?.biography || 'N/A'}</Text>
                         </View>
-                        <MovieList title={'Movies'} data={personMovies} hideSeeAll={true} />
+                        {/* <MovieList title={'Movies'} data={personMovies} hideSeeAll={true} /> */}
                     </View>
                 )
             }
@@ -139,7 +153,7 @@ const styles = StyleSheet.create({
     },
     detailContainer: {
         marginHorizontal: 5, 
-        marginTop: 5, 
+        marginTop: 10, 
         flexDirection: 'row', 
         justifyContent: 'space-between', 
         alignItems: 'center',
