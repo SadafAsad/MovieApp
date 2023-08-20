@@ -8,7 +8,7 @@ import Cast from "../components/Cast"
 import MovieList from "../components/MovieList"
 import Loading from "../components/Loading"
 import axios from "axios"
-import { fallBackMoviePoster, fetchMovieCredits, fetchMovieDetails, image500 } from "../api/moviedb"
+import { fallBackMoviePoster, fetchMovieCredits, fetchMovieDetails, fetchSimilarMovies, image500 } from "../api/moviedb"
 
 var {width, height} = Dimensions.get('window')
 const ios = Platform.OS == 'ios'
@@ -31,6 +31,7 @@ const MovieScreen = () => {
     useEffect(() => {
         getMovieDetails(item.id)
         getMovieCredits(item.id)
+        getSimilarMovies(item.id)
     }, [item])
 
     const getMovieDetails = async id => {
@@ -41,6 +42,10 @@ const MovieScreen = () => {
     const getMovieCredits = async id => {
         const data = await fetchMovieCredits(id)
         if (data && data.cast) setCast(data.cast)
+    }
+    const getSimilarMovies = async id => {
+        const data = await fetchSimilarMovies(id)
+        if (data && data.results) setSimilarMovies(data.results)
     }
 
     return (
@@ -102,7 +107,7 @@ const MovieScreen = () => {
                 <Text style={description}>{movie?.overview}</Text>
             </View>
             <Cast cast={cast} navigation={navigation} />
-            {/* <MovieList title="Similar Movies" hideSeeAll={true} data={similarMovies} /> */}
+            <MovieList title="Similar Movies" hideSeeAll={true} data={similarMovies} />
         </ScrollView>
     )
 }

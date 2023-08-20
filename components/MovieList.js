@@ -35,11 +35,11 @@ const MovieList = ({ title, data, hideSeeAll }) => {
                                 <View style={{margin: 4}}>
                                     <Image 
                                         // source={require('../assets/oppenheimer.jpg')}
-                                        source={{uri: image185(item.poster_path) || fallBackMoviePoster}}
+                                        source={{uri: image185(item?.poster_path) || fallBackMoviePoster}}
                                         style={{width: width*0.33, height: height*0.22, borderRadius: 10}}
                                     />
                                     <Text style={{color: 'white', marginTop: 5}}>
-                                        {item.title.length>14 ? item.title.slice(0,14)+'...' : item.title}
+                                        {item?.title.length>14 ? item?.title.slice(0,14)+'...' : item?.title}
                                     </Text>
                                 </View>
                             </TouchableWithoutFeedback>
