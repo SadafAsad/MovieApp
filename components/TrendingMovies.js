@@ -37,9 +37,9 @@ const styles = StyleSheet.create({
     },
     textDesign: {
         color: 'white',
-        marginBottom: 5,
+        marginBottom: 20,
         marginLeft: 5,
-        marginTop: 5,
+        marginTop: 20,
         fontSize: 16
     }
 })

@@ -11,7 +11,7 @@ const MovieList = ({ title, data, hideSeeAll }) => {
 
     return ( 
         <View> 
-            <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+            <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 10}}>
                 <Text style={{color: 'white', fontSize: 16, marginTop: 5, marginLeft: 5, marginBottom: 5}}>{title}</Text>
                 {
                     !hideSeeAll && (
