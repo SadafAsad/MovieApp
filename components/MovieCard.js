@@ -1,6 +1,6 @@
 import React from 'react'
 import { TouchableWithoutFeedback, Dimensions, Image } from 'react-native'
-import { image500 } from '../api/moviedb'
+import { fallBackMoviePoster, image500 } from '../api/moviedb'
 
 var {width, height} = Dimensions.get('window')
 
@@ -9,7 +9,7 @@ const MovieCard = ({ item, handleClick }) => {
         <TouchableWithoutFeedback onPress={handleClick(item)}>
             <Image 
                 // source={require('../assets/barbie.jpg')} 
-                source={{uri: image500(item.poster_path)}}
+                source={{uri: image500(item.poster_path) || fallBackMoviePoster}}
                 style={{
                     width: width*0.6, 
                     height: height*0.4, 
