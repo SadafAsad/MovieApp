@@ -1,8 +1,8 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { StyleSheet, View, Text, Dimensions, ScrollView, SafeAreaView, TouchableOpacity, Image } from "react-native"
 import { ChevronLeftIcon } from "react-native-heroicons/outline"
 import { HeartIcon } from "react-native-heroicons/solid"
-import { useNavigation } from "@react-navigation/native"
+import { useNavigation, useRoute } from "@react-navigation/native"
 import MovieList from "../components/MovieList"
 import Loading from "../components/Loading"
 
@@ -11,12 +11,18 @@ const ios = Platform.OS == 'ios'
 const verticalMargin = ios ? 0 : 3
 
 const PersonScreen = () => {
+    const {params: item} = useRoute()
     const { container, safeArea, backButton, shadow, circular, name, location, detail, detailContainer, detailTitle, detailText, bio, bioText } = styles
+
     const [isFavourite, toggleFavourite] = useState(false)
     const [personMovies, setPersonMovies] = useState([1, 2, 3, 4])
     const [loading, setLoading] = useState(false)
 
     const navigation = useNavigation()
+
+    useEffect(() => {
+        console.log('person log: ', item)
+    },[item])
 
     return (
         <ScrollView style={container}>
