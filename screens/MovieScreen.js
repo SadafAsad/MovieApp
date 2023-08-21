@@ -106,8 +106,8 @@ const MovieScreen = () => {
                 </View>
                 <Text style={description}>{movie?.overview}</Text>
             </View>
-            <Cast cast={cast} navigation={navigation} />
-            <MovieList title="Similar Movies" hideSeeAll={true} data={similarMovies} />
+            { cast.length>0 && <Cast cast={cast} navigation={navigation} /> }
+            { similarMovies.length>0 && <MovieList title="Similar Movies" hideSeeAll={true} data={similarMovies} /> }
         </ScrollView>
     )
 }
