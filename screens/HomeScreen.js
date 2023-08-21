@@ -48,8 +48,7 @@ const HomeScreen = () => {
                     <TouchableOpacity onPress={() => navigation.navigate('Login')}>
                         <UserCircleIcon size={30} strokeWidth={2} color={'white'} />
                     </TouchableOpacity>
-                    <Text style={logo}>
-                        <Text style={mDesign}>M</Text>ovies</Text>
+                    <Text style={logo}><Text style={mDesign}>M</Text>ovies</Text>
                     <TouchableOpacity onPress={() => navigation.navigate('Search')}>
                         <MagnifyingGlassIcon size={30} strokeWidth={2} color={'white'} />
                     </TouchableOpacity>
