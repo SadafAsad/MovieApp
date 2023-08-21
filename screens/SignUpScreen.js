@@ -15,20 +15,27 @@ const SignUpScreen = () => {
     return (
         <View style={container}>
             <View style={{width: width}}>
-                <SafeAreaView style={safeArea}>
+                {/* <SafeAreaView style={safeArea}>
                     <TouchableOpacity
                         onPress={() => navigation.goBack()}
                         style={backButton}
                     >
                         <ChevronLeftIcon size='28' strokeWidth={2.5} color='white' />
                     </TouchableOpacity>
-                </SafeAreaView>
+                </SafeAreaView> */}
                 <View style={container1}>
                     <Text style={logo}><Text style={mDesign}>M</Text>ovies</Text>
                     <View style={container2}>
                         <View style={inputArea}>
                             <TextInput
                                 placeholder="Username"
+                                placeholderTextColor={'gray'}
+                                style={input}
+                            />
+                        </View>
+                        <View style={inputArea}>
+                            <TextInput
+                                placeholder="Email"
                                 placeholderTextColor={'gray'}
                                 style={input}
                             />

@@ -2,6 +2,7 @@ import React from "react"
 import { StyleSheet, View, Text, TouchableOpacity, TextInput, SafeAreaView, Dimensions } from "react-native"
 import { ChevronLeftIcon } from "react-native-heroicons/outline"
 import { useNavigation } from "@react-navigation/native"
+import { Ionicons } from '@expo/vector-icons';
 
 var {width, height} = Dimensions.get('window')
 const ios = Platform.OS == 'ios'
@@ -15,14 +16,14 @@ const LoginScreen = () => {
     return (
         <View style={container}>
             <View style={{width: width}}>
-                <SafeAreaView style={safeArea}>
+                {/* <SafeAreaView style={safeArea}>
                     <TouchableOpacity
                         onPress={() => navigation.goBack()}
                         style={backButton}
                     >
                         <ChevronLeftIcon size='28' strokeWidth={2.5} color='white' />
                     </TouchableOpacity>
-                </SafeAreaView>
+                </SafeAreaView> */}
                 <View style={container1}>
                     <Text style={logo}><Text style={mDesign}>M</Text>ovies</Text>
                     <View style={container2}>
@@ -45,6 +46,10 @@ const LoginScreen = () => {
                                 <Text style={{color: '#262626', fontWeight: 'bold', alignSelf: 'center', fontSize: 16}}>LOG IN</Text>
                             </TouchableOpacity>
                         </View>
+                        <TouchableOpacity onPress={() => navigation.goBack()} style={{marginTop: 20, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+                            <Ionicons name="arrow-back-circle-outline" size={20} color="#eab308" />
+                            <Text style={[signup, {marginLeft: 5}]}>Continue without logging in</Text>
+                        </TouchableOpacity>
                         <TouchableOpacity onPress={() => navigation.navigate('SignUp')} style={{marginTop: 20}}>
                             <Text style={signup}>Don't have an account? Sign Up</Text>
                         </TouchableOpacity>
