@@ -28,9 +28,16 @@ Navigate to the project directory: `cd MovieApp`
 Install dependencies:
 
 ```
-brew install node
-
-npm install -g expo-cli
+npm install @react-navigation/native 
+npx expo install react-native-screens react-native-safe-area-context 
+npm install @react-nagivation/stack 
+npm install @react-navigation/native-stack
+npm i react-native-heroicons 
+npm i react-native-heroicons react-native-svg
+npm i react-native-snap-carousel 
+npm i axios
+npm i expo-linear-gradient
+npm i react-native-progress 
 ```
 
 ## Usage
