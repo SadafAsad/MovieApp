@@ -10,7 +10,7 @@ const MovieList = ({ title, data, hideSeeAll }) => {
 
     return ( 
         <View> 
-            <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 10, marginBottom: 10, marginRight: 10, marginLeft: 10}}>
+            <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 20, marginBottom: 10, marginRight: 10, marginLeft: 10}}>
                 <Text style={{color: 'white', fontSize: 16}}>{title}</Text>
                 {
                     !hideSeeAll && (

@@ -8,7 +8,7 @@ const Cast = ({ cast, navigation }) => {
 
     return (
         <View>
-            <Text style={{color: 'white', fontSize: 16, marginLeft: 5, marginBottom: 15, marginTop: 10}}>Top Cast</Text>
+            <Text style={{color: 'white', fontSize: 16, marginLeft: 5, marginBottom: 15, marginTop: 15}}>Top Cast</Text>
             <ScrollView
                 horizontal
                 showsHorizontalScrollIndicator={false}

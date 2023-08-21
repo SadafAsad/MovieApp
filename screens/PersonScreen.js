@@ -24,7 +24,7 @@ const PersonScreen = () => {
 
     useEffect(() => {
         getPersonDetails(item.id)
-        // getPersonMovies(item.id)
+        getPersonMovies(item.id)
     },[item])
 
     const getPersonDetails = async id => {
@@ -34,7 +34,7 @@ const PersonScreen = () => {
     }
     const getPersonMovies = async id => {
         const data = await fetchPersonMovies(id)
-        if (data) setPersonMovies()
+        if (data && data.cast) setPersonMovies(data.cast)
     }
 
     return (
@@ -91,7 +91,7 @@ const PersonScreen = () => {
                             <Text style={bio}>Biography</Text>
                             <Text style={bioText}>{person?.biography || 'N/A'}</Text>
                         </View>
-                        {/* <MovieList title={'Movies'} data={personMovies} hideSeeAll={true} /> */}
+                        <MovieList title={'Movies'} data={personMovies} hideSeeAll={true} />
                     </View>
                 )
             }
