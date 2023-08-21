@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { View, Text, SafeAreaView, StyleSheet, Platform, TouchableOpacity, ScrollView } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
-import { Bars3CenterLeftIcon, MagnifyingGlassIcon } from 'react-native-heroicons/outline'
+import { MagnifyingGlassIcon, UserCircleIcon } from 'react-native-heroicons/outline'
 import TrendingMovies from '../components/TrendingMovies'
 import MovieList from '../components/MovieList'
 import { useNavigation } from '@react-navigation/native'
@@ -45,7 +45,7 @@ const HomeScreen = () => {
             <SafeAreaView style={ ios ? safeArea : marginBottom=3 }>
                 <StatusBar style='light'/>
                 <View style={icons}>
-                    <Bars3CenterLeftIcon size={30} strokeWidth={2} color={'white'} />
+                    <UserCircleIcon size={30} strokeWidth={2} color={'white'} />
                     <Text style={logo}>
                         <Text style={mDesign}>M</Text>ovies</Text>
                     <TouchableOpacity onPress={() => navigation.navigate('Search')}>
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginHorizontal: 4
+        marginHorizontal: 10
     },
     logo: {
         color: 'white',
