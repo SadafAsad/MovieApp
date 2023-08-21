@@ -14,8 +14,6 @@ Explore, Connect, and Personalize Your Cinematic Journey
 
 Dive into the realm of trending, upcoming, and top-rated movies. Explore a treasure trove of information, from cast members to similar movie recommendations, all in one place.
 
-Want to know more about your favorite actors? Delve into their profiles and filmography.
-
 With MovieApp, you can create a personalized movie experience. Keep track of the movies you've watched, those on your watchlist, and your all-time favorites. 
 
 Unite with fellow movie enthusiasts by following them and exploring their curated movie lists. 
