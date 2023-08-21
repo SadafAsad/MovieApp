@@ -43,6 +43,6 @@ npm install -g expo-cli
 
 Thanks for providing inspiration and code snippets: 
 
-[Weather App Demo](https://github.com/syednomishah/Movie-App-React-Native.git) developed by [Syed Noman](https://github.com/syednomishah)
+[Movie App React Native](https://github.com/syednomishah/Movie-App-React-Native.git) developed by [Syed Noman](https://github.com/syednomishah)
 
 
