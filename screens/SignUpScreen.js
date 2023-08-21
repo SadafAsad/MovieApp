@@ -8,7 +8,7 @@ const ios = Platform.OS == 'ios'
 const topMargin = ios ? 0 : 3
 
 const SignUpScreen = () => {
-    const { container, logo, mDesign, input, inputArea, signup, container2, backButton, safeArea, container1 } = styles
+    const { container, logo, mDesign, input, inputArea, signup, container2, backButton, safeArea, container1, loginInputArea } = styles
 
     const navigation = useNavigation()
 
@@ -40,8 +40,13 @@ const SignUpScreen = () => {
                                 style={input}
                             />
                         </View>
-                        <TouchableOpacity onPress={() => navigation.goBack()}>
-                            <Text style={signup}>Already have an account? Log in</Text>
+                        <View style={loginInputArea}>
+                            <TouchableOpacity onPress={() => {}}>
+                                <Text style={{color: '#262626', fontWeight: 'bold', alignSelf: 'center', fontSize: 16}}>SIGN UP</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <TouchableOpacity onPress={() => navigation.goBack()} style={{marginTop: 20}}>
+                            <Text style={signup}>Already have an account? Log In</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -69,7 +74,7 @@ const styles = StyleSheet.create({
     },
     inputArea: {
         margin: 5,
-        padding: 5,
+        padding: 13,
         borderRadius: 50,
         borderColor: 'gray',
         borderWidth: 1,
@@ -79,13 +84,15 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch'
     },
     input: {
+        fontSize: 15,
         fontWeight: 'bold',
         color: 'white',
         letterSpacing: 1,
         margin: 5
     },
     signup: {
-        color: '#eab308'
+        color: '#eab308',
+        fontSize: 15
     },
     container2: {
         alignSelf: 'stretch',
@@ -105,7 +112,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingHorizontal: 4,
         marginTop: {topMargin}
-    }
+    },
+    loginInputArea: {
+        margin: 5,
+        padding: 15,
+        borderRadius: 50,
+        borderColor: 'gray',
+        borderWidth: 1,
+        alignContent: 'center',
+        alignSelf: 'stretch',
+        backgroundColor: '#eab308'
+    },
 })
 
 export default SignUpScreen
