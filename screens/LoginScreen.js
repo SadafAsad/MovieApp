@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect} from "react"
 import { StyleSheet, View, Text, TouchableOpacity, TextInput, SafeAreaView, Dimensions } from "react-native"
 import { ChevronLeftIcon } from "react-native-heroicons/outline"
 import { useNavigation } from "@react-navigation/native"
@@ -10,6 +10,11 @@ const topMargin = ios ? 0 : 3
 
 const LoginScreen = () => {
     const { container, logo, mDesign, input, inputArea, signup, container2, backButton, safeArea, container1, loginInputArea } = styles
+
+    const [emailAddress, onEmailChanged] = useState('');
+    const [password, onPasswordChanged] = useState('');
+    const [error, onErrorChanged] = useState('');
+    const [hasError, onHasErrorChanged] = useState(false);
 
     const navigation = useNavigation()
 
@@ -29,9 +34,13 @@ const LoginScreen = () => {
                     <View style={container2}>
                         <View style={inputArea}>
                             <TextInput
-                                placeholder="Username"
+                                placeholder="Email"
                                 placeholderTextColor={'gray'}
                                 style={input}
+                                keyboardType="email-address"
+                                autoCapitalize="none"
+                                onChangeText={onEmailChanged}
+                                value={emailAddress}
                             />
                         </View>
                         <View style={inputArea}>
@@ -39,6 +48,12 @@ const LoginScreen = () => {
                                 placeholder="Password"
                                 placeholderTextColor={'gray'}
                                 style={input}
+                                keyboardType="default"
+                                autoCapitalize="none"
+                                autoCorrect={false}
+                                // secureTextEntry={passwordVisibility}
+                                onChangeText={onPasswordChanged}
+                                value={password}
                             />
                         </View>
                         <View style={loginInputArea}>
