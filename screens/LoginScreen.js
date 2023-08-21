@@ -1,8 +1,9 @@
 import React, { useState, useEffect} from "react"
-import { StyleSheet, View, Text, TouchableOpacity, TextInput, SafeAreaView, Dimensions } from "react-native"
-import { ChevronLeftIcon } from "react-native-heroicons/outline"
+import { StyleSheet, View, Text, TouchableOpacity, TextInput, SafeAreaView, Dimensions, Pressable } from "react-native"
+import { ChevronLeftIcon, EyeIcon, EyeSlashIcon } from "react-native-heroicons/outline"
 import { useNavigation } from "@react-navigation/native"
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
+import { UseTogglePasswordVisibility } from '../components/TogglePasswordVisibility'
 
 var {width, height} = Dimensions.get('window')
 const ios = Platform.OS == 'ios'
@@ -15,6 +16,7 @@ const LoginScreen = () => {
     const [password, onPasswordChanged] = useState('');
     const [error, onErrorChanged] = useState('');
     const [hasError, onHasErrorChanged] = useState(false);
+    const { passwordVisibility, rightIcon, handlePasswordVisibility } = UseTogglePasswordVisibility();
 
     const navigation = useNavigation()
 
@@ -51,10 +53,18 @@ const LoginScreen = () => {
                                 keyboardType="default"
                                 autoCapitalize="none"
                                 autoCorrect={false}
-                                // secureTextEntry={passwordVisibility}
+                                secureTextEntry={passwordVisibility}
                                 onChangeText={onPasswordChanged}
                                 value={password}
                             />
+                            <TouchableOpacity onPress={handlePasswordVisibility}>
+                                {
+                                    rightIcon=='eye' ? 
+                                    <EyeIcon name={rightIcon} size={30} color="gray" />
+                                    :
+                                    <EyeSlashIcon name={rightIcon} size={30} color="gray" />
+                                }
+                            </TouchableOpacity>
                         </View>
                         <View style={loginInputArea}>
                             <TouchableOpacity onPress={() => {}}>
@@ -142,7 +152,7 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         alignSelf: 'stretch',
         backgroundColor: '#eab308'
-    },
+    }
 })
 
 export default LoginScreen
