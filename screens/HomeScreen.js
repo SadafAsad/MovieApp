@@ -7,16 +7,18 @@ import MovieList from '../components/MovieList'
 import { useNavigation } from '@react-navigation/native'
 import Loading from '../components/Loading'
 import { fetchTopRatedMovies, fetchTrendingMovies, fetchUpcomingMovies } from '../api/moviedb'
+import { checkAuthenticationState } from '../api/firebasedb'
 
 const ios = Platform.OS == 'ios'
 
 const HomeScreen = () => {
     const { container, safeArea, icons, logo, mDesign } = styles
 
-    const [trending, setTrending] = useState([1, 2, 3])
-    const [upcoming, setUpcoming] = useState([1, 2, 3])
-    const [topRated, setTopRated] = useState([1, 2, 3])
+    const [trending, setTrending] = useState([])
+    const [upcoming, setUpcoming] = useState([])
+    const [topRated, setTopRated] = useState([])
     const [loading, setLoading] = useState(true)
+    const [user, setUser] = useState(null)
 
     const navigation = useNavigation()
 
@@ -24,6 +26,7 @@ const HomeScreen = () => {
         getTrendingMovies()
         getUpcomingMovies()
         getTopRatedMovies()
+        setUser(checkAuthenticationState())
     }, [])
 
     const getTrendingMovies = async () => {
@@ -45,7 +48,11 @@ const HomeScreen = () => {
             <SafeAreaView style={ ios ? safeArea : marginBottom=3 }>
                 <StatusBar style='light'/>
                 <View style={icons}>
-                    <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                    <TouchableOpacity 
+                        onPress={() => 
+                            user=='' ? navigation.navigate('Login') : navigation.navigate('Profile')
+                        }
+                    >
                         <UserCircleIcon size={30} strokeWidth={2} color={'white'} />
                     </TouchableOpacity>
                     <Text style={logo}><Text style={mDesign}>M</Text>ovies</Text>

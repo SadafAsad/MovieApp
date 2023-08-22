@@ -3,7 +3,7 @@ import firebaseConfig from "../config/firebase"
  
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app"
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth"
 import { getFirestore, doc, setDoc } from "firebase/firestore"
 import { getStorage } from "firebase/storage"
 
@@ -34,5 +34,17 @@ export const loginUser = async (email, password) => {
       console.error('Error logging in:', error.message)
       return {e: true, data: error.message}
     }
+}
+
+export const checkAuthenticationState = () => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log('User is logged in:', user)
+        return user.uid
+      } else {
+        console.log('User is not logged in')
+        return ''
+      }
+    })
 }
   
