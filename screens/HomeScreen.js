@@ -18,7 +18,6 @@ const HomeScreen = () => {
     const [upcoming, setUpcoming] = useState([])
     const [topRated, setTopRated] = useState([])
     const [loading, setLoading] = useState(true)
-    const [user, setUser] = useState(null)
 
     const navigation = useNavigation()
 
@@ -26,7 +25,6 @@ const HomeScreen = () => {
         getTrendingMovies()
         getUpcomingMovies()
         getTopRatedMovies()
-        setUser(checkAuthenticationState())
     }, [])
 
     const getTrendingMovies = async () => {
@@ -49,9 +47,10 @@ const HomeScreen = () => {
                 <StatusBar style='light'/>
                 <View style={icons}>
                     <TouchableOpacity 
-                        onPress={() => 
-                            user=='' ? navigation.navigate('Login') : navigation.navigate('Profile')
-                        }
+                        onPress={async () => {
+                            const result = await checkAuthenticationState()
+                            result.loggedIn ? navigation.navigate('Profile') : navigation.navigate('Login')
+                        }}
                     >
                         <UserCircleIcon size={30} strokeWidth={2} color={'white'} />
                     </TouchableOpacity>

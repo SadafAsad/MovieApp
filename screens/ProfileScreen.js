@@ -5,6 +5,7 @@ import { ChevronLeftIcon, ArrowLeftOnRectangleIcon } from "react-native-heroicon
 import { LinearGradient } from "expo-linear-gradient"
 import MovieList from "../components/MovieList"
 import Loading from "../components/Loading"
+import { signOutUser } from "../api/firebasedb"
 
 var {width, height} = Dimensions.get('window')
 const ios = Platform.OS == 'ios'
@@ -34,7 +35,13 @@ const ProfileScreen = () => {
                     >
                         <ChevronLeftIcon size='28' strokeWidth={2.5} color='white' />
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => toggleFavourite(!isFavourite)} style={{marginRight: 5}}>
+                    <TouchableOpacity 
+                        onPress={() => {
+                            signOutUser()
+                            navigation.dispatch(StackActions.popToTop())
+                        }}
+                        style={{marginRight: 5}}
+                    >
                         <ArrowLeftOnRectangleIcon size='35' color={'white'} />
                     </TouchableOpacity>
                 </SafeAreaView>

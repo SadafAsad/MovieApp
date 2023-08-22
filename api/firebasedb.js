@@ -3,7 +3,7 @@ import firebaseConfig from "../config/firebase"
  
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app"
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth"
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth"
 import { getFirestore, doc, setDoc } from "firebase/firestore"
 import { getStorage } from "firebase/storage"
 
@@ -27,24 +27,35 @@ export const createUser = async (username, email, password) => {
 
 export const loginUser = async (email, password) => {
     try {
-      const user = await signInWithEmailAndPassword(auth, email, password)
-      console.log('User logged in successfully')
-      return {e: false, data: user}
+        const user = await signInWithEmailAndPassword(auth, email, password)
+        console.log('User logged in successfully')
+        return {e: false, data: user}
     } catch (error) {
-      console.error('Error logging in:', error.message)
-      return {e: true, data: error.message}
+        console.error('Error logging in:', error.message)
+        return {e: true, data: error.message}
     }
 }
 
 export const checkAuthenticationState = () => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        console.log('User is logged in:', user)
-        return user.uid
-      } else {
-        console.log('User is not logged in')
-        return ''
-      }
+    return new Promise  ((resolve) =>{
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+            console.log('User is logged in:', user)
+            resolve({loggedIn: true, user: user.uid})
+            } else {
+            console.log('User is not logged in')
+            resolve({loggedIn: false, user: ''})
+            }
+        })
     })
+}
+
+export const signOutUser = async () => {
+    try {
+        await signOut(auth)
+        console.log('User signed out successfully')
+    } catch (error) {
+        console.error('Error signing out:', error.message)
+    }
 }
   
