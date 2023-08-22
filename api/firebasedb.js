@@ -3,7 +3,7 @@ import firebaseConfig from "../config/firebase"
  
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app"
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
 import { getFirestore, doc, setDoc } from "firebase/firestore"
 import { getStorage } from "firebase/storage"
 
@@ -12,7 +12,7 @@ export const auth = getAuth(firebaseApp)
 export const db = getFirestore(firebaseApp)
 export const storage = getStorage(firebaseApp)
 
-export const createUserAccount = async (username, email, password) => {
+export const createUser = async (username, email, password) => {
     try {
         const result = await createUserWithEmailAndPassword(auth, email, password)
         const userUid = result.user.uid
@@ -22,6 +22,17 @@ export const createUserAccount = async (username, email, password) => {
     } catch (error) {
         console.error('Error creating user account:', error.message)
         return {e: true, data: error.message}
+    }
+}
+
+export const loginUser = async (email, password) => {
+    try {
+      const user = await signInWithEmailAndPassword(auth, email, password)
+      console.log('User logged in successfully')
+      return {e: false, data: user}
+    } catch (error) {
+      console.error('Error logging in:', error.message)
+      return {e: true, data: error.message}
     }
 }
   

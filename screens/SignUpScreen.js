@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity, TextInput, SafeAreaView, Dime
 import { ChevronLeftIcon, EyeIcon, EyeSlashIcon } from "react-native-heroicons/outline"
 import { useNavigation } from "@react-navigation/native"
 import { UseTogglePasswordVisibility } from '../components/TogglePasswordVisibility'
-import { createUserAccount } from "../api/firebasedb"
+import { createUser } from "../api/firebasedb"
 
 var {width, height} = Dimensions.get('window')
 const ios = Platform.OS == 'ios'
@@ -82,7 +82,7 @@ const SignUpScreen = () => {
                                 onPress={async () => {
                                     onHasErrorChanged(false)
                                     onErrorChanged('')
-                                    const result = await createUserAccount(username, email, password)
+                                    const result = await createUser(username, email, password)
                                     if (result.e) {
                                         onHasErrorChanged(true)
                                         onErrorChanged(result.data)

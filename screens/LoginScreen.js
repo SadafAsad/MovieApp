@@ -4,6 +4,7 @@ import { ChevronLeftIcon, EyeIcon, EyeSlashIcon } from "react-native-heroicons/o
 import { useNavigation } from "@react-navigation/native"
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { UseTogglePasswordVisibility } from '../components/TogglePasswordVisibility'
+import { loginUser } from "../api/firebasedb"
 
 var {width, height} = Dimensions.get('window')
 const ios = Platform.OS == 'ios'
@@ -12,7 +13,7 @@ const topMargin = ios ? 0 : 3
 const LoginScreen = () => {
     const { container, logo, mDesign, input, inputArea, signup, container2, backButton, safeArea, container1, loginInputArea } = styles
 
-    const [emailAddress, onEmailChanged] = useState('');
+    const [email, onEmailChanged] = useState('');
     const [password, onPasswordChanged] = useState('');
     const [error, onErrorChanged] = useState('');
     const [hasError, onHasErrorChanged] = useState(false);
@@ -42,7 +43,7 @@ const LoginScreen = () => {
                                 keyboardType="email-address"
                                 autoCapitalize="none"
                                 onChangeText={onEmailChanged}
-                                value={emailAddress}
+                                value={email}
                             />
                         </View>
                         <View style={inputArea}>
@@ -67,7 +68,20 @@ const LoginScreen = () => {
                             </TouchableOpacity>
                         </View>
                         <View style={loginInputArea}>
-                            <TouchableOpacity onPress={() => {}}>
+                            <TouchableOpacity 
+                                onPress={async () => {
+                                    onHasErrorChanged(false)
+                                    onErrorChanged('')
+                                    const result = await loginUser(email, password)
+                                    if (result.e) {
+                                        onHasErrorChanged(true)
+                                        onErrorChanged(result.data)
+                                        onEmailChanged('')
+                                        onPasswordChanged('')
+                                    }
+                                    else navigation.navigate('Profile')
+                                }}
+                            >
                                 <Text style={{color: '#262626', fontWeight: 'bold', alignSelf: 'center', fontSize: 16}}>LOG IN</Text>
                             </TouchableOpacity>
                         </View>
@@ -78,6 +92,7 @@ const LoginScreen = () => {
                         <TouchableOpacity onPress={() => navigation.navigate('SignUp')} style={{marginTop: 20}}>
                             <Text style={signup}>Don't have an account? Sign Up</Text>
                         </TouchableOpacity>
+                        { hasError && <Text style={{color: 'red', margin: 30}}>{error}</Text> }
                     </View>
                 </View>
             </View>
