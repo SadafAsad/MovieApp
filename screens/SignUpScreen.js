@@ -1,7 +1,9 @@
-import React from "react"
+import React, { useState } from "react"
 import { StyleSheet, View, Text, TouchableOpacity, TextInput, SafeAreaView, Dimensions } from "react-native"
-import { ChevronLeftIcon } from "react-native-heroicons/outline"
+import { ChevronLeftIcon, EyeIcon, EyeSlashIcon } from "react-native-heroicons/outline"
 import { useNavigation } from "@react-navigation/native"
+import { UseTogglePasswordVisibility } from '../components/TogglePasswordVisibility'
+import { createUserAccount } from "../api/firebasedb"
 
 var {width, height} = Dimensions.get('window')
 const ios = Platform.OS == 'ios'
@@ -9,6 +11,13 @@ const topMargin = ios ? 0 : 3
 
 const SignUpScreen = () => {
     const { container, logo, mDesign, input, inputArea, signup, container2, backButton, safeArea, container1, loginInputArea } = styles
+
+    const [username, onUsernameChanged] = useState('');
+    const [email, onEmailChanged] = useState('');
+    const [password, onPasswordChanged] = useState('');
+    const [error, onErrorChanged] = useState('');
+    const [hasError, onHasErrorChanged] = useState(false);
+    const { passwordVisibility, rightIcon, handlePasswordVisibility } = UseTogglePasswordVisibility();
 
     const navigation = useNavigation()
 
@@ -31,6 +40,9 @@ const SignUpScreen = () => {
                                 placeholder="Username"
                                 placeholderTextColor={'gray'}
                                 style={input}
+                                autoCapitalize="none"
+                                onChangeText={onUsernameChanged}
+                                value={username}
                             />
                         </View>
                         <View style={inputArea}>
@@ -38,6 +50,10 @@ const SignUpScreen = () => {
                                 placeholder="Email"
                                 placeholderTextColor={'gray'}
                                 style={input}
+                                keyboardType="email-address"
+                                autoCapitalize="none"
+                                onChangeText={onEmailChanged}
+                                value={email}
                             />
                         </View>
                         <View style={inputArea}>
@@ -45,10 +61,29 @@ const SignUpScreen = () => {
                                 placeholder="Password"
                                 placeholderTextColor={'gray'}
                                 style={input}
+                                keyboardType="default"
+                                autoCapitalize="none"
+                                autoCorrect={false}
+                                secureTextEntry={passwordVisibility}
+                                onChangeText={onPasswordChanged}
+                                value={password}
                             />
+                            <TouchableOpacity onPress={handlePasswordVisibility}>
+                                {
+                                    rightIcon=='eye' ? 
+                                    <EyeIcon name={rightIcon} size={30} color="gray" />
+                                    :
+                                    <EyeSlashIcon name={rightIcon} size={30} color="gray" />
+                                }
+                            </TouchableOpacity>
                         </View>
                         <View style={loginInputArea}>
-                            <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+                            <TouchableOpacity 
+                                onPress={async () => {
+                                    await createUserAccount(username, email, password)
+                                    navigation.navigate('Profile')
+                                }}
+                            >
                                 <Text style={{color: '#262626', fontWeight: 'bold', alignSelf: 'center', fontSize: 16}}>SIGN UP</Text>
                             </TouchableOpacity>
                         </View>

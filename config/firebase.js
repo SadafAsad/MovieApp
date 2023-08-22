@@ -6,7 +6,6 @@ const firebaseConfig = {
     storageBucket: "movieapp-94694.appspot.com",
     messagingSenderId: "713509454103",
     appId: "1:713509454103:web:2a266b268d069a6e423752"
-  };
-  
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
+}
+
+export default firebaseConfig
