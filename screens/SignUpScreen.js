@@ -12,12 +12,12 @@ const topMargin = ios ? 0 : 3
 const SignUpScreen = () => {
     const { container, logo, mDesign, input, inputArea, signup, container2, backButton, safeArea, container1, loginInputArea } = styles
 
-    const [username, onUsernameChanged] = useState('');
-    const [email, onEmailChanged] = useState('');
-    const [password, onPasswordChanged] = useState('');
-    const [error, onErrorChanged] = useState('');
-    const [hasError, onHasErrorChanged] = useState(false);
-    const { passwordVisibility, rightIcon, handlePasswordVisibility } = UseTogglePasswordVisibility();
+    const [username, onUsernameChanged] = useState('')
+    const [email, onEmailChanged] = useState('')
+    const [password, onPasswordChanged] = useState('')
+    const [error, onErrorChanged] = useState('')
+    const [hasError, onHasErrorChanged] = useState(false)
+    const { passwordVisibility, rightIcon, handlePasswordVisibility } = UseTogglePasswordVisibility()
 
     const navigation = useNavigation()
 
@@ -80,8 +80,17 @@ const SignUpScreen = () => {
                         <View style={loginInputArea}>
                             <TouchableOpacity 
                                 onPress={async () => {
-                                    await createUserAccount(username, email, password)
-                                    navigation.navigate('Profile')
+                                    onHasErrorChanged(false)
+                                    onErrorChanged('')
+                                    const result = await createUserAccount(username, email, password)
+                                    if (result.e) {
+                                        onHasErrorChanged(true)
+                                        onErrorChanged(result.data)
+                                        onEmailChanged('')
+                                        onPasswordChanged('')
+                                        onUsernameChanged('')
+                                    }
+                                    else navigation.navigate('Profile')
                                 }}
                             >
                                 <Text style={{color: '#262626', fontWeight: 'bold', alignSelf: 'center', fontSize: 16}}>SIGN UP</Text>
@@ -90,6 +99,7 @@ const SignUpScreen = () => {
                         <TouchableOpacity onPress={() => navigation.goBack()} style={{marginTop: 20}}>
                             <Text style={signup}>Already have an account? Log In</Text>
                         </TouchableOpacity>
+                        { hasError && <Text style={{color: 'red', margin: 30}}>{error}</Text> }
                     </View>
                 </View>
             </View>
