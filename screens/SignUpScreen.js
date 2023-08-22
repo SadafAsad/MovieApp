@@ -48,7 +48,7 @@ const SignUpScreen = () => {
                             />
                         </View>
                         <View style={loginInputArea}>
-                            <TouchableOpacity onPress={() => {}}>
+                            <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
                                 <Text style={{color: '#262626', fontWeight: 'bold', alignSelf: 'center', fontSize: 16}}>SIGN UP</Text>
                             </TouchableOpacity>
                         </View>
