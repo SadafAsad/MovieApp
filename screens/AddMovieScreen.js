@@ -82,9 +82,11 @@ const AddMovieScreen = () => {
                                                 />
                                                 <Text style={name}>{item?.title?.length>22 ? item?.title?.slice(0,22)+'...' : item?.title}</Text>
                                             </View>
-                                            { toList=='Favourites' && <HeartIcon size='30' color={'white'} /> }
-                                            { toList=='Watched' && <PlusIcon size='30' color={'white'} /> }
-                                            { toList=='TBW' && <ClockIcon size='30' color={'white'} /> }
+                                            <TouchableOpacity>
+                                                { toList=='Favourites' && <HeartIcon size='30' color={'white'} /> }
+                                                { toList=='Watched' && <PlusIcon size='30' color={'white'} /> }
+                                                { toList=='TBW' && <ClockIcon size='30' color={'white'} /> }
+                                            </TouchableOpacity>
                                         </View>
                                     )
                                 })
