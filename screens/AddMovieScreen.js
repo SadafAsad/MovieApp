@@ -51,13 +51,13 @@ const AddMovieScreen = () => {
 
     const addMovieToUserList = (mid) => {
         if (toList=='Favourites') {
-            // updateFavourites(item.user, mid)
+            updateFavourites(item.user, mid)
         }
         else if (toList=='Watched') {
             updateWatched(item.user, mid)
         }
         else {
-            // updateToWatch(item.user, mid)
+            updateToWatch(item.user, mid)
         }
     }
 
