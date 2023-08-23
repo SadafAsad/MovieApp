@@ -16,7 +16,17 @@ export const createUser = async (username, email, password) => {
     try {
         const result = await createUserWithEmailAndPassword(auth, email, password)
         const userUid = result.user.uid
-        await setDoc(doc(db, "users", userUid), {username: username})
+        await setDoc(
+            doc(db, "users", userUid), 
+            {
+                username: username, 
+                following: [],
+                follower: [],
+                favourites: [],
+                watched: [],
+                toWatch: []
+            }
+        )
         console.log('User account created successfully')
         return {e: false, data: userUid}
     } catch (error) {
