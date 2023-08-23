@@ -83,10 +83,22 @@ export const getUserByUID = async (uid) => {
     }
 }
 
-export const updateFavourites = (uid, mid) => {
-    db.collection('users').doc(uid).update({
-        favorites: firebase.firestore.FieldValue.arrayUnion(mid)
-    })
+export const updateFavourites = async (uid, mid) => {
+    try {
+        const userRef = db.collection('users').doc(uid)
+        const userDoc = await userRef.get()
+
+        if (userDoc.exists) {
+            const userData = userDoc.data()
+            const updatedFavourites = [...userData.favorites, mid]
+            await userRef.set({ favorites: updatedFavourites }, { merge: true })
+            console.log('Favourite updated successfully')
+        } else {
+            console.log('User not found')
+        }
+        } catch (error) {
+        console.error('Error updating favourite:', error)
+        }
 }
 export const updateWatched = (uid, mid) => {
     db.collection('users').doc(uid).update({
