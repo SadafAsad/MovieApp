@@ -5,7 +5,6 @@ import { useNavigation } from "@react-navigation/native"
 import Loading from "../components/Loading"
 import { debounce } from 'lodash'
 import { fallBackMoviePoster, image185, searchMovie } from "../api/moviedb"
-import AddMovie from "../components/AddMovie"
 
 var {width, height} = Dimensions.get('window')
 
