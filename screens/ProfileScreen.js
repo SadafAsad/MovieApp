@@ -6,6 +6,7 @@ import { LinearGradient } from "expo-linear-gradient"
 import MovieList from "../components/MovieList"
 import Loading from "../components/Loading"
 import { getUserByUID, signOutUser } from "../api/firebasedb"
+import { fetchMovieDetails } from "../api/moviedb"
 
 var {width, height} = Dimensions.get('window')
 const ios = Platform.OS == 'ios'
@@ -29,9 +30,9 @@ const ProfileScreen = () => {
         getUserByUID(item.userID).then((userData) => {
             if (userData) {
                 setUsername(userData.username)
-                setFavouriteMovies(userData.favourites)
-                setWatchedMovies(userData.watched)
-                setToWatchMovies(userData.toWatch)
+                getMovies(userData.favourites).then((movieData)=>{setFavouriteMovies(movieData)})
+                getMovies(userData.watched).then((movieData)=>{setWatchedMovies(movieData)})
+                getMovies(userData.toWatch).then((movieData)=>{setToWatchMovies(movieData)})
                 setFollower(userData.follower)
                 setFollowing(userData.following)
             } else {
@@ -39,6 +40,14 @@ const ProfileScreen = () => {
             }
         })
     },[])
+
+    const getMovies = async (movieIDs) => {
+        const movies = []
+        for (let i=0; i<movieIDs.length; i++) {
+            movies.push(await fetchMovieDetails(movieIDs[i]))
+        }
+        return movies
+    }
 
     return (
         <ScrollView
