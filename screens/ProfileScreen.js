@@ -1,11 +1,11 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { StyleSheet, View, Text, ScrollView, SafeAreaView, TouchableOpacity, Dimensions, Platform, Image } from "react-native"
 import { useRoute, useNavigation, StackActions } from "@react-navigation/native"
 import { ChevronLeftIcon, ArrowLeftOnRectangleIcon } from "react-native-heroicons/outline"
 import { LinearGradient } from "expo-linear-gradient"
 import MovieList from "../components/MovieList"
 import Loading from "../components/Loading"
-import { signOutUser } from "../api/firebasedb"
+import { getUserByUID, signOutUser } from "../api/firebasedb"
 
 var {width, height} = Dimensions.get('window')
 const ios = Platform.OS == 'ios'
@@ -21,6 +21,16 @@ const ProfileScreen = () => {
     
     const {params: item} = useRoute()
     const navigation = useNavigation()
+
+    useEffect( () => {
+        getUserByUID(item.userID).then((userData) => {
+            if (userData) {
+              console.log('User data:', userData);
+            } else {
+              console.log('User not found');
+            }
+        })
+    },[])
 
     return (
         <ScrollView

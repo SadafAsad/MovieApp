@@ -49,7 +49,7 @@ const HomeScreen = () => {
                     <TouchableOpacity 
                         onPress={async () => {
                             const result = await checkAuthenticationState()
-                            result.loggedIn ? navigation.navigate('Profile') : navigation.navigate('Login')
+                            result.loggedIn ? navigation.navigate('Profile', {userID: result.user}) : navigation.navigate('Login')
                         }}
                     >
                         <UserCircleIcon size={30} strokeWidth={2} color={'white'} />
