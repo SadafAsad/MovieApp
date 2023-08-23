@@ -59,7 +59,7 @@ const MovieList = ({ title, data, hideSeeAll }) => {
                     }}>
                         <TouchableOpacity 
                             style={{justifyContent: 'center', alignItems: 'center'}}
-                            onPress={() => navigation.navigate('AddMovie')}
+                            onPress={() => navigation.navigate('AddMovie', {to: title})}
                         >
                             <PlusIcon size={50} strokeWidth={2} color={'white'}/>
                             <Text style={{color: 'white'}}>Add movies to your list</Text>

@@ -1,16 +1,17 @@
-import React, { useCallback, useState } from "react"
+import React, { useCallback, useState, useEffect } from "react"
 import { StyleSheet, View, SafeAreaView, Dimensions, TextInput, TouchableOpacity, ScrollView, Text, TouchableWithoutFeedback, Image } from "react-native"
 import { XMarkIcon } from "react-native-heroicons/outline"
 import { useNavigation, useRoute } from "@react-navigation/native"
 import Loading from "../components/Loading"
 import { debounce } from 'lodash'
-import { fallBackMoviePoster, image185, searchMovie } from "../api/moviedb"
-import AddMovie from "../components/AddMovie"
+import { fallBackMoviePoster, image185, searchMovie, fetchTrendingMovies } from "../api/moviedb"
+import { HeartIcon } from "react-native-heroicons/solid"
+import { PlusIcon, ClockIcon } from "react-native-heroicons/outline"
 
 var {width, height} = Dimensions.get('window')
 
 const AddMovieScreen = () => {
-    const { searchArea, searchInput, cancel } = styles
+    const { searchArea, searchInput, cancel, container, poster, name, movieContainer } = styles
 
     const [results, setResults] = useState([])
     const [loading, setLoading] = useState(false)
@@ -31,11 +32,16 @@ const AddMovieScreen = () => {
                 if (data && data.results) setResults(data.results)
             })
         } else {
-            setLoading(false)
-            setResults([])
+            setResults(getTrendingMovies())
         }
     }
     const handleTextDebounce = useCallback(debounce(handleSearch, 400), [])
+
+    const getTrendingMovies = async () => {
+        const data = await fetchTrendingMovies()
+        if (data && data.results) setMovies(data.results)
+        setLoading(false)
+    }
 
     return (
         <SafeAreaView style={{flex: 1, backgroundColor: '#262626'}}>
@@ -56,40 +62,34 @@ const AddMovieScreen = () => {
                 ) : (
                     results.length>0 ? (
                         <ScrollView
+                            vertical
                             showsVerticalScrollIndicator={false}
-                            contentContainerStyle={{paddingHorizontal: 15, paddingVertical: 5}}
+                            contentContainerStyle={{paddingVertical: 15}}
                         >
-                            <Text style={{color: 'white', fontWeight: 'bold', marginLeft: 5}}>Results ({results.length})</Text>
-                            <View style={{
-                                flexDirection: 'row',
-                                justifyContent: 'space-between',
-                                flexWrap: 'wrap'
-                            }}>
-                                {
-                                    results.map((item, index) => {
-                                        return(
-                                            <TouchableWithoutFeedback
-                                                key={index}
-                                                onPress={() => navigation.push('Movie', item)}
-                                            >
-                                                <View style={{marginVertical: 5}}>
-                                                    <Image
-                                                        style={{borderRadius: 10, width: width*0.44, height: height*0.3}}
-                                                        // source={require('../assets/barbie.jpg')}
-                                                        source={{uri: image185(item?.poster_path) || fallBackMoviePoster}}
-                                                    />
-                                                    <Text style={{color: 'white', marginLeft: 5, marginTop: 5, color: 'lightgray'}}>
-                                                        {item?.title.length>22 ? item?.title.slice(0,22)+'...' : item?.title}
-                                                    </Text>
-                                                </View>
-                                            </TouchableWithoutFeedback>
-                                        )
-                                    })
-                                }
-                            </View>
+                            {
+                                movies.map((item, index) => {
+                                    return (
+                                        <View style={container}>
+                                            <View style={movieContainer}>
+                                                <Image
+                                                    source={{uri: image185(item?.poster_path) || fallBackMoviePoster}}
+                                                    style={poster}
+                                                />
+                                                <Text style={name}>{item?.title?.length>22 ? item?.title?.slice(0,22)+'...' : item?.title}</Text>
+                                            </View>
+                                            <HeartIcon size='35' color={'white'} />
+                                        </View>
+                                    )
+                                })
+                            }
                         </ScrollView>
                     ) : (
-                        <AddMovie />
+                        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                            <Image 
+                                style={{width: 200, height: 200}}
+                                source={require('../assets/movietime.png')}
+                            />
+                        </View>
                     )
                 )
             }
@@ -119,6 +119,25 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         backgroundColor: 'gray',
         padding: 5
+    },
+    container: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        margin: 4
+    },
+    poster: {
+        width: width*0.15,
+        height: height*0.1
+    },
+    name: {
+        color: 'white',
+        margin: 10,
+        fontWeight: 'bold'
+    },
+    movieContainer: {
+        flexDirection: 'row',
+        alignItems: 'center'
     }
 })
 
