@@ -86,19 +86,11 @@ export const getUserByUID = async (uid) => {
 export const updateFavourites = async (uid, mid) => {
     try {
         const userRef = doc(db, 'users', uid)
-        const userDoc = await getDoc(userData)
-
-        if (userDoc.exists) {
-            const userData = userDoc.data()
-            const updatedFavourites = [...userData.favorites, mid]
-            await userRef.set({ favorites: updatedFavourites }, { merge: true })
-            console.log('Favourite updated successfully')
-        } else {
-            console.log('User not found')
-        }
-        } catch (error) {
-        console.error('Error updating favourite:', error)
-        }
+        await updateDoc(userRef, { favourites: arrayUnion(mid) })
+        console.log('list updated successfully');
+    } catch (error) {
+        console.error('Error updating list:', error)
+    }
 }
 export const updateWatched = async (uid, mid) => {
     try {
@@ -109,18 +101,31 @@ export const updateWatched = async (uid, mid) => {
         console.error('Error updating list:', error)
     }
 }
-export const updateToWatch = (uid, mid) => {
-    db.collection('users').doc(uid).update({
-        toWatch: firebase.firestore.FieldValue.arrayUnion(mid)
-    })
+export const updateToWatch = async (uid, mid) => {
+    try {
+        const userRef = doc(db, 'users', uid)
+        await updateDoc(userRef, { toWatch: arrayUnion(mid) })
+        console.log('list updated successfully');
+    } catch (error) {
+        console.error('Error updating list:', error)
+    }
 }
-export const upateFollowing = (uid, pid) => {
-    db.collection('users').doc(uid).update({
-    following: firebase.firestore.FieldValue.arrayUnion(pid)
-    })
-    db.collection('users').doc(pid).update({
-        follower: firebase.firestore.FieldValue.arrayUnion(uid)
-    })
+export const upateFollowing = async (uid, pid) => {
+    try {
+        const userRef = doc(db, 'users', uid)
+        await updateDoc(userRef, { following: arrayUnion(pid) })
+        console.log('following updated successfully');
+    } catch (error) {
+        console.error('Error updating following:', error)
+    }
+
+    try {
+        const userRef = doc(db, 'users', pid)
+        await updateDoc(userRef, { follower: arrayUnion(uid) })
+        console.log('follower updated successfully');
+    } catch (error) {
+        console.error('Error updating follower:', error)
+    }
 }
   
   
