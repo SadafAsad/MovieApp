@@ -34,7 +34,6 @@ export const createUser = async (username, email, password) => {
         return {e: true, data: error.message}
     }
 }
-
 export const loginUser = async (email, password) => {
     try {
         const user = await signInWithEmailAndPassword(auth, email, password)
@@ -45,7 +44,6 @@ export const loginUser = async (email, password) => {
         return {e: true, data: error.message}
     }
 }
-
 export const checkAuthenticationState = () => {
     return new Promise  ((resolve) =>{
         onAuthStateChanged(auth, (user) => {
@@ -59,7 +57,6 @@ export const checkAuthenticationState = () => {
         })
     })
 }
-
 export const signOutUser = async () => {
     try {
         await signOut(auth)
@@ -68,22 +65,46 @@ export const signOutUser = async () => {
         console.error('Error signing out:', error.message)
     }
 }
-
 export const getUserByUID = async (uid) => {
     try {
-      const userRef = doc(db, 'users', uid)
-      const userDoc = await getDoc(userRef)
-  
-      if (userDoc.exists) {
+        const userRef = doc(db, 'users', uid)
+        const userDoc = await getDoc(userRef)
+
+        if (userDoc.exists) {
         const userData = userDoc.data()
         return userData
-      } else {
+        } else {
         console.log('User not found')
         return null
-      }
+        }
     } catch (error) {
-      console.error('Error retrieving user data:', error)
-      return null
+        console.error('Error retrieving user data:', error)
+        return null
     }
 }
+
+export const updateFavourites = (uid, mid) => {
+    db.collection('users').doc(uid).update({
+        favorites: firebase.firestore.FieldValue.arrayUnion(mid)
+    })
+}
+export const updateWatched = (uid, mid) => {
+    db.collection('users').doc(uid).update({
+        watched: firebase.firestore.FieldValue.arrayUnion(mid)
+    })
+}
+export const updateToWatch = (uid, mid) => {
+    db.collection('users').doc(uid).update({
+        toWatch: firebase.firestore.FieldValue.arrayUnion(mid)
+    })
+}
+export const upateFollowing = (uid, pid) => {
+    db.collection('users').doc(uid).update({
+    following: firebase.firestore.FieldValue.arrayUnion(pid)
+    })
+    db.collection('users').doc(pid).update({
+        follower: firebase.firestore.FieldValue.arrayUnion(uid)
+    })
+}
+  
   
