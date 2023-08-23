@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react"
 import { StyleSheet, View, SafeAreaView, Dimensions, TextInput, TouchableOpacity, ScrollView, Text, TouchableWithoutFeedback, Image } from "react-native"
 import { XMarkIcon } from "react-native-heroicons/outline"
-import { useNavigation } from "@react-navigation/native"
+import { useNavigation, useRoute } from "@react-navigation/native"
 import Loading from "../components/Loading"
 import { debounce } from 'lodash'
 import { fallBackMoviePoster, image185, searchMovie } from "../api/moviedb"
@@ -15,6 +15,7 @@ const SearchScreen = () => {
     const [loading, setLoading] = useState(false)
     
     const navigation = useNavigation()
+    const {params: item} = useRoute()
     
     const handleSearch = value => {
         if (value && value.length>2){
@@ -89,12 +90,16 @@ const SearchScreen = () => {
                             </View>
                         </ScrollView>
                     ) : (
-                        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                            <Image 
-                                style={{width: 200, height: 200}}
-                                source={require('../assets/movietime.png')}
-                            />
-                        </View>
+                        item.from==='Home' ? (
+                            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                                <Image 
+                                    style={{width: 200, height: 200}}
+                                    source={require('../assets/movietime.png')}
+                                />
+                            </View>
+                        ) : (
+                            <View></View>
+                        )
                     )
                 )
             }
