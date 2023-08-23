@@ -9,7 +9,7 @@ import AddMovie from "../components/AddMovie"
 
 var {width, height} = Dimensions.get('window')
 
-const SearchScreen = () => {
+const AddMovieScreen = () => {
     const { searchArea, searchInput, cancel } = styles
 
     const [results, setResults] = useState([])
@@ -36,8 +36,6 @@ const SearchScreen = () => {
         }
     }
     const handleTextDebounce = useCallback(debounce(handleSearch, 400), [])
-
-    let movieName = "Barbie"
 
     return (
         <SafeAreaView style={{flex: 1, backgroundColor: '#262626'}}>
@@ -91,16 +89,7 @@ const SearchScreen = () => {
                             </View>
                         </ScrollView>
                     ) : (
-                        item.from==='Home' ? (
-                            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                                <Image 
-                                    style={{width: 200, height: 200}}
-                                    source={require('../assets/movietime.png')}
-                                />
-                            </View>
-                        ) : (
-                            <AddMovie />
-                        )
+                        <AddMovie />
                     )
                 )
             }
@@ -133,4 +122,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default SearchScreen
+export default AddMovieScreen

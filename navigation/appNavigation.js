@@ -8,6 +8,7 @@ import SearchScreen from '../screens/SearchScreen'
 import LoginScreen from '../screens/LoginScreen'
 import SignUpScreen from '../screens/SignUpScreen'
 import ProfileScreen from '../screens/ProfileScreen'
+import AddMovieScreen from '../screens/AddMovieScreen'
 
 const Stack = createNativeStackNavigator()
 
@@ -22,6 +23,7 @@ const AppNavigation = () => {
                 <Stack.Screen name={'Login'} options={{headerShown: false}} component={LoginScreen} />
                 <Stack.Screen name={'SignUp'} options={{headerShown: false}} component={SignUpScreen} />
                 <Stack.Screen name={'Profile'} options={{headerShown: false}} component={ProfileScreen} />
+                <Stack.Screen name={'AddMovie'} options={{headerShown: false}} component={AddMovieScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     )
