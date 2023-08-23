@@ -17,7 +17,10 @@ const ProfileScreen = () => {
     const [loading, setLoading] = useState(false)
     const [favouriteMovies, setFavouriteMovies] = useState([])
     const [watchedMovies, setWatchedMovies] = useState([])
-    const [toWatchMovies, SetToWatchMovies] = useState([])
+    const [toWatchMovies, setToWatchMovies] = useState([])
+    const [following, setFollowing] = useState([])
+    const [follower, setFollower] = useState([])
+    const [username, setUsername] = useState('')
     
     const {params: item} = useRoute()
     const navigation = useNavigation()
@@ -25,7 +28,12 @@ const ProfileScreen = () => {
     useEffect( () => {
         getUserByUID(item.userID).then((userData) => {
             if (userData) {
-              console.log('User data:', userData);
+                setUsername(userData.username)
+                setFavouriteMovies(userData.favourites)
+                setWatchedMovies(userData.watched)
+                setToWatchMovies(userData.toWatch)
+                setFollower(userData.follower)
+                setFollowing(userData.following)
             } else {
               console.log('User not found');
             }
@@ -76,10 +84,14 @@ const ProfileScreen = () => {
                 }
             </View>
             <View style={{marginTop: -(height*0.09)}}>
-                <Text style={name}>Sadaf Asad</Text>
+                <Text style={name}>{username}</Text>
                 <View style={genreContainer}>
-                    <Text style={movieDetail}>Following 100</Text>
-                    <Text style={movieDetail}>Follower 20</Text>
+                    <TouchableOpacity>
+                        <Text style={movieDetail}>Following {following.length}</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <Text style={movieDetail}>Follower {follower.length}</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
             {/* <MovieList title="Favourites" hideSeeAll={true} data={favouriteMovies} />
