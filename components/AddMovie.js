@@ -8,7 +8,7 @@ import { fetchTrendingMovies, image185 } from "../api/moviedb"
 var {width, height} = Dimensions.get('window')
 
 const AddMovie = () => {
-    const { container, poster, name } = styles
+    const { container, poster, name, movieContainer } = styles
 
     const [trending, setTrending] = useState([])
     const [loading, setLoading] = useState(true)
@@ -29,17 +29,19 @@ const AddMovie = () => {
         <ScrollView
             vertical
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={{}}
+            contentContainerStyle={{paddingVertical: 15}}
         >
             {
                 trending.map((item, index) => {
                     return (
                         <View style={container}>
-                            <Image
-                                source={{uri: image185(item?.poster_path) || fallBackMoviePoster}}
-                                style={poster}
-                            />
-                            <Text style={name}>{item?.title?.length>14 ? item?.title?.slice(0,14)+'...' : item?.title}</Text>
+                            <View style={movieContainer}>
+                                <Image
+                                    source={{uri: image185(item?.poster_path) || fallBackMoviePoster}}
+                                    style={poster}
+                                />
+                                <Text style={name}>{item?.title?.length>22 ? item?.title?.slice(0,22)+'...' : item?.title}</Text>
+                            </View>
                             <HeartIcon size='35' color={'white'} />
                         </View>
                     )
@@ -52,15 +54,22 @@ const AddMovie = () => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
+        alignItems: 'center',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        margin: 4
     },
     poster: {
-        width: width*0.5,
-        height: height*0.3
+        width: width*0.15,
+        height: height*0.1
     },
     name: {
-        color: 'white'
+        color: 'white',
+        margin: 10,
+        fontWeight: 'bold'
+    },
+    movieContainer: {
+        flexDirection: 'row',
+        alignItems: 'center'
     }
 })
 
