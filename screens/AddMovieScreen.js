@@ -18,6 +18,10 @@ const AddMovieScreen = () => {
     
     const navigation = useNavigation()
     const {params: item} = useRoute()
+
+    useEffect(() => {
+        getTrendingMovies()
+    },[])
     
     const handleSearch = value => {
         if (value && value.length>2){
@@ -32,14 +36,15 @@ const AddMovieScreen = () => {
                 if (data && data.results) setResults(data.results)
             })
         } else {
-            setResults(getTrendingMovies())
+            console.log("CAME HERE")
+            getTrendingMovies()
         }
     }
     const handleTextDebounce = useCallback(debounce(handleSearch, 400), [])
 
     const getTrendingMovies = async () => {
         const data = await fetchTrendingMovies()
-        if (data && data.results) setMovies(data.results)
+        if (data && data.results) setResults(data.results)
         setLoading(false)
     }
 
@@ -67,7 +72,7 @@ const AddMovieScreen = () => {
                             contentContainerStyle={{paddingVertical: 15}}
                         >
                             {
-                                movies.map((item, index) => {
+                                results.map((item, index) => {
                                     return (
                                         <View style={container}>
                                             <View style={movieContainer}>
