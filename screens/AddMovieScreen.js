@@ -6,6 +6,7 @@ import Loading from "../components/Loading"
 import { debounce } from 'lodash'
 import { fallBackMoviePoster, image185, searchMovie, fetchTrendingMovies } from "../api/moviedb"
 import { PlusIcon, ClockIcon, HeartIcon } from "react-native-heroicons/outline"
+import { updateFavourites, updateToWatch, updateWatched } from "../api/firebasedb"
 
 var {width, height} = Dimensions.get('window')
 
@@ -48,6 +49,18 @@ const AddMovieScreen = () => {
         setLoading(false)
     }
 
+    const addMovieToUserList = (mid) => {
+        if (toList=='Favourites') {
+            updateFavourites(item.user, mid)
+        }
+        else if (toList=='Watched') {
+            updateWatched(item.user, mid)
+        }
+        else {
+            updateToWatch(item.user, mid)
+        }
+    }
+
     return (
         <SafeAreaView style={{flex: 1, backgroundColor: '#262626'}}>
             <View style={searchArea}>
@@ -82,7 +95,7 @@ const AddMovieScreen = () => {
                                                 />
                                                 <Text style={name}>{item?.title?.length>22 ? item?.title?.slice(0,22)+'...' : item?.title}</Text>
                                             </View>
-                                            <TouchableOpacity>
+                                            <TouchableOpacity onPress={addMovieToUserList(item?.movie_id)}>
                                                 { toList=='Favourites' && <HeartIcon size='30' color={'white'} /> }
                                                 { toList=='Watched' && <PlusIcon size='30' color={'white'} /> }
                                                 { toList=='TBW' && <ClockIcon size='30' color={'white'} /> }
