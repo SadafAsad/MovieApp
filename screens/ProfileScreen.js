@@ -94,9 +94,9 @@ const ProfileScreen = () => {
                     </TouchableOpacity>
                 </View>
             </View>
-            {/* <MovieList title="Favourites" hideSeeAll={true} data={favouriteMovies} />
+            <MovieList title="Favourites" hideSeeAll={true} data={favouriteMovies} />
             <MovieList title="Watched" hideSeeAll={true} data={watchedMovies} />
-            <MovieList title="TBW" hideSeeAll={true} data={toWatchMovies} /> */}
+            <MovieList title="TBW" hideSeeAll={true} data={toWatchMovies} />
         </ScrollView>
     )
 }
