@@ -83,9 +83,9 @@ const AddMovieScreen = () => {
                                                 />
                                                 <Text style={name}>{item?.title?.length>22 ? item?.title?.slice(0,22)+'...' : item?.title}</Text>
                                             </View>
-                                            { toList=='Favourites' && <HeartIcon size='35' color={'white'} /> }
-                                            { toList=='Watched' && <PlusIcon size='35' color={'white'} /> }
-                                            { toList=='TBW' && <ClockIcon size='35' color={'white'} /> }
+                                            { toList=='Favourites' && <HeartIcon size='30' color={'white'} /> }
+                                            { toList=='Watched' && <PlusIcon size='30' color={'white'} /> }
+                                            { toList=='TBW' && <ClockIcon size='30' color={'white'} /> }
                                         </View>
                                     )
                                 })
@@ -132,7 +132,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        margin: 4
+        marginTop: 4,
+        marginBottom: 4,
+        marginLeft: 10,
+        marginRight: 10
     },
     poster: {
         width: width*0.15,
@@ -141,7 +144,8 @@ const styles = StyleSheet.create({
     name: {
         color: 'white',
         margin: 10,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontSize: 16
     },
     movieContainer: {
         flexDirection: 'row',
