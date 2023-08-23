@@ -5,8 +5,7 @@ import { useNavigation, useRoute } from "@react-navigation/native"
 import Loading from "../components/Loading"
 import { debounce } from 'lodash'
 import { fallBackMoviePoster, image185, searchMovie, fetchTrendingMovies } from "../api/moviedb"
-import { HeartIcon } from "react-native-heroicons/solid"
-import { PlusIcon, ClockIcon } from "react-native-heroicons/outline"
+import { PlusIcon, ClockIcon, HeartIcon } from "react-native-heroicons/outline"
 
 var {width, height} = Dimensions.get('window')
 
