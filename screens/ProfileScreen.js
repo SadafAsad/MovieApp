@@ -6,7 +6,7 @@ import { LinearGradient } from "expo-linear-gradient"
 import MovieList from "../components/MovieList"
 import Loading from "../components/Loading"
 import { getUserByUID, signOutUser } from "../api/firebasedb"
-import { fetchMovieDetails } from "../api/moviedb"
+import { fallBackMoviePoster, fetchMovieDetails, image185, image342, image500 } from "../api/moviedb"
 
 var {width, height} = Dimensions.get('window')
 const ios = Platform.OS == 'ios'
@@ -22,6 +22,7 @@ const ProfileScreen = () => {
     const [following, setFollowing] = useState([])
     const [follower, setFollower] = useState([])
     const [username, setUsername] = useState('')
+    const [cover, setCover] = useState('')
     
     const {params: item} = useRoute()
     const navigation = useNavigation()
@@ -30,7 +31,10 @@ const ProfileScreen = () => {
         getUserByUID(item.userID).then((userData) => {
             if (userData) {
                 setUsername(userData.username)
-                getMovies(userData.favourites).then((movieData)=>{setFavouriteMovies(movieData)})
+                getMovies(userData.favourites).then((movieData)=>{
+                    setFavouriteMovies(movieData)
+                    setCover(movieData[movieData.length-1].poster_path)
+                })
                 getMovies(userData.watched).then((movieData)=>{setWatchedMovies(movieData)})
                 getMovies(userData.toWatch).then((movieData)=>{setToWatchMovies(movieData)})
                 setFollower(userData.follower)
@@ -78,8 +82,7 @@ const ProfileScreen = () => {
                     ) : (
                         <View>
                             <Image 
-                                source={require('../assets/oppenheimer.jpg')}
-                                // source={{uri: image500(movie?.poster_path) || fallBackMoviePoster}}
+                                source={{uri: image500(cover) || fallBackMoviePoster}}
                                 style={poster}
                             />
                             <LinearGradient
