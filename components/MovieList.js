@@ -6,7 +6,7 @@ import { PlusIcon } from "react-native-heroicons/outline"
 
 var {width, height} = Dimensions.get('window')
 
-const MovieList = ({ title, data, hideSeeAll }) => {
+const MovieList = ({ title, data, hideSeeAll, user }) => {
     const navigation = useNavigation()
 
     return ( 
@@ -59,7 +59,7 @@ const MovieList = ({ title, data, hideSeeAll }) => {
                     }}>
                         <TouchableOpacity 
                             style={{justifyContent: 'center', alignItems: 'center'}}
-                            onPress={() => navigation.navigate('AddMovie', {to: title})}
+                            onPress={() => navigation.navigate('AddMovie', {user: user, to: title})}
                         >
                             <PlusIcon size={50} strokeWidth={2} color={'white'}/>
                             <Text style={{color: 'white'}}>Add movies to your list</Text>

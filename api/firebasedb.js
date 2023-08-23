@@ -4,7 +4,7 @@ import firebaseConfig from "../config/firebase"
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app"
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth"
-import { getFirestore, doc, setDoc, collection, query, getDoc } from "firebase/firestore"
+import { getFirestore, doc, setDoc, getDoc, updateDoc, arrayUnion } from "firebase/firestore"
 import { getStorage } from "firebase/storage"
 
 export const firebaseApp = initializeApp(firebaseConfig)
@@ -85,8 +85,8 @@ export const getUserByUID = async (uid) => {
 
 export const updateFavourites = async (uid, mid) => {
     try {
-        const userRef = db.collection('users').doc(uid)
-        const userDoc = await userRef.get()
+        const userRef = doc(db, 'users', uid)
+        const userDoc = await getDoc(userData)
 
         if (userDoc.exists) {
             const userData = userDoc.data()
@@ -100,10 +100,14 @@ export const updateFavourites = async (uid, mid) => {
         console.error('Error updating favourite:', error)
         }
 }
-export const updateWatched = (uid, mid) => {
-    db.collection('users').doc(uid).update({
-        watched: firebase.firestore.FieldValue.arrayUnion(mid)
-    })
+export const updateWatched = async (uid, mid) => {
+    try {
+        const userRef = doc(db, 'users', uid)
+        await updateDoc(userRef, { watched: arrayUnion(mid) })
+        console.log('list updated successfully');
+    } catch (error) {
+        console.error('Error updating list:', error)
+    }
 }
 export const updateToWatch = (uid, mid) => {
     db.collection('users').doc(uid).update({

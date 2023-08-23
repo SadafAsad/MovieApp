@@ -51,13 +51,13 @@ const AddMovieScreen = () => {
 
     const addMovieToUserList = (mid) => {
         if (toList=='Favourites') {
-            updateFavourites(item.user, mid)
+            // updateFavourites(item.user, mid)
         }
         else if (toList=='Watched') {
             updateWatched(item.user, mid)
         }
         else {
-            updateToWatch(item.user, mid)
+            // updateToWatch(item.user, mid)
         }
     }
 
@@ -95,7 +95,7 @@ const AddMovieScreen = () => {
                                                 />
                                                 <Text style={name}>{item?.title?.length>22 ? item?.title?.slice(0,22)+'...' : item?.title}</Text>
                                             </View>
-                                            <TouchableOpacity onPress={addMovieToUserList(item?.movie_id)}>
+                                            <TouchableOpacity onPress={() => addMovieToUserList(item?.id)}>
                                                 { toList=='Favourites' && <HeartIcon size='30' color={'white'} /> }
                                                 { toList=='Watched' && <PlusIcon size='30' color={'white'} /> }
                                                 { toList=='TBW' && <ClockIcon size='30' color={'white'} /> }
