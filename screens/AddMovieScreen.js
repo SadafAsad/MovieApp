@@ -15,12 +15,14 @@ const AddMovieScreen = () => {
 
     const [results, setResults] = useState([])
     const [loading, setLoading] = useState(false)
+    const [toList, setToList] = useState('')
     
     const navigation = useNavigation()
     const {params: item} = useRoute()
 
     useEffect(() => {
         getTrendingMovies()
+        setToList(item.to)
     },[])
     
     const handleSearch = value => {
@@ -36,7 +38,6 @@ const AddMovieScreen = () => {
                 if (data && data.results) setResults(data.results)
             })
         } else {
-            console.log("CAME HERE")
             getTrendingMovies()
         }
     }
@@ -82,7 +83,9 @@ const AddMovieScreen = () => {
                                                 />
                                                 <Text style={name}>{item?.title?.length>22 ? item?.title?.slice(0,22)+'...' : item?.title}</Text>
                                             </View>
-                                            <HeartIcon size='35' color={'white'} />
+                                            { toList=='Favourites' && <HeartIcon size='35' color={'white'} /> }
+                                            { toList=='Watched' && <PlusIcon size='35' color={'white'} /> }
+                                            { toList=='TBW' && <ClockIcon size='35' color={'white'} /> }
                                         </View>
                                     )
                                 })
