@@ -2,7 +2,11 @@
 
 Explore, Connect, and Personalize Your Cinematic Journey
 
-<div style="display: flex; justify-content: center; align-items: center;">
+<div style="position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;">
   <img src='screenshots/Screendhot%201.png' width='200'/>
   <img src='screenshots/Screenshot%202.png' width='200'/>
 </div>
