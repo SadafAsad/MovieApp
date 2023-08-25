@@ -2,7 +2,7 @@
 
 Explore, Connect, and Personalize Your Cinematic Journey
 
-<div style="display: flex; justify-content: center;">
+<div style="display: flex; justify-content: center; align-items: center;">
   <img src='screenshots/Screendhot%201.png' width='200'/>
   <img src='screenshots/Screenshot%202.png' width='200'/>
 </div>
