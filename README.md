@@ -2,7 +2,7 @@
 
 Explore, Connect, and Personalize Your Cinematic Journey
 
-![](screenshots/Screenshot%201.png)
+![](screenshots/Screendhot%201.png)
 ![](screenshots/Screenshot%202.png)
 
 ## Table of Contents
