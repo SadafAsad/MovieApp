@@ -2,7 +2,7 @@
 
 Explore, Connect, and Personalize Your Cinematic Journey
 
-<p align"center">
+<p align="center">
   <img src='screenshots/Screendhot%201.png' width='200'/>
   <img src='screenshots/Screenshot%202.png' width='200'/>
 </p>
