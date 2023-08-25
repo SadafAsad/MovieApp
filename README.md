@@ -2,8 +2,8 @@
 
 Explore, Connect, and Personalize Your Cinematic Journey
 
-![](screenshots/Screendhot%201.png)
-![](screenshots/Screenshot%202.png)
+<img src='screenshots/Screendhot%201.png' width='100'/>
+<img src='screenshots/Screenshot%202.png' width='100'/>
 
 ## Table of Contents
 
