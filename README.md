@@ -12,7 +12,6 @@ Explore, Connect, and Personalize Your Cinematic Journey
 - [Project Description](#project-description)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Configuration](#configuration)
 - [Acknowledgments](#acknowledgments)
 
 ## Project Description
@@ -30,26 +29,11 @@ Clone the repository: `git clone https://github.com/SadafAsad/MovieApp.git`
 
 Navigate to the project directory: `cd MovieApp`
 
-Install dependencies:
-
-```
-npm install @react-navigation/native 
-npx expo install react-native-screens react-native-safe-area-context 
-npm install @react-nagivation/stack 
-npm install @react-navigation/native-stack
-npm i react-native-heroicons 
-npm i react-native-heroicons react-native-svg
-npm i react-native-snap-carousel 
-npm i axios
-npm i expo-linear-gradient
-npm i react-native-progress 
-```
+Install dependencies: `npm install`
 
 ## Usage
 
 ``` npm run ```
-
-## Configuration
 
 ## Acknowledgments
 
